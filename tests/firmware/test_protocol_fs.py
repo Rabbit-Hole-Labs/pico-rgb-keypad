@@ -7,8 +7,9 @@ import unittest
 
 from _path import FIRMWARE  # noqa: F401  (puts firmware/lib on sys.path)
 
+from rgbkeypad import protocol
 from rgbkeypad.fs import READ_ONLY_MESSAGE, Files, check_path, file_handlers
-from rgbkeypad.protocol import MAX_LINE, Protocol
+from rgbkeypad.protocol import MAX_LINE, OUT_OF_MEMORY, TOO_LONG, Protocol, peek_id
 
 
 class ProtocolTests(unittest.TestCase):
@@ -20,7 +21,7 @@ class ProtocolTests(unittest.TestCase):
         self.proto.on("refuse", lambda msg: {"ok": False, "error": "no", "applied": True})
 
     def replies(self):
-        return [json.loads(line) for chunk in self.out for line in chunk.decode().splitlines()]
+        return [json.loads(line) for line in b"".join(self.out).decode().splitlines() if line]
 
     def test_reply_carries_request_id(self):
         self.proto.feed(b'{"id": 7, "cmd": "echo", "value": 3}\n')
@@ -44,13 +45,63 @@ class ProtocolTests(unittest.TestCase):
         self.proto.feed(b'{"id": 1, "cmd": "refuse"}\n')
         self.assertEqual(self.replies(), [{"id": 1, "ok": False, "error": "no", "applied": True}])
 
+    def test_peek_id(self):
+        self.assertEqual(peek_id(b'{"config": {"id": 3}, "id": 42, "cmd": "x"}'), 42)
+        self.assertEqual(peek_id(b'{"id":7,"cmd":"x"}'), 7)
+        self.assertIsNone(peek_id(b'{"cmd": "x"}'))
+        self.assertIsNone(peek_id(b'{"id": "abc"}'))
+
+    def test_out_of_memory_parsing_replies_and_recovers(self):
+        real_loads = protocol.json.loads
+        calls = []
+
+        def loads(text):
+            calls.append(1)
+            if len(calls) == 1:
+                raise MemoryError("memory allocation failed")
+            return real_loads(text)
+
+        protocol.json.loads = loads
+        try:
+            self.proto.feed(b'{"cmd": "echo", "id": 5}\n{"id": 6, "cmd": "echo"}\n')
+        finally:
+            protocol.json.loads = real_loads
+        self.assertEqual(self.replies(), [
+            {"id": 5, "ok": False, "error": OUT_OF_MEMORY},
+            {"id": 6, "ok": True, "value": None},
+        ])
+
+    def test_dump_streams_replies_and_out_of_memory_while_sending_still_replies(self):
+        sent = []
+        attempts = []
+
+        def dump(message):
+            attempts.append(message)
+            if len(attempts) == 1:
+                raise MemoryError()
+            sent.append(message)
+
+        proto = Protocol(self.out.append, dump)
+        proto.on("big", lambda msg: {"config": "x" * 100})
+        proto.feed(b'{"id": 4, "cmd": "big"}\n')
+        self.assertEqual(sent, [{"id": 4, "ok": False, "error": OUT_OF_MEMORY}])
+        self.assertEqual(self.out, [])
+
+    def test_out_of_memory_in_handler_is_a_reply(self):
+        def hungry(msg):
+            raise MemoryError()
+        self.proto.on("hungry", hungry)
+        self.proto.feed(b'{"id": 9, "cmd": "hungry"}\n')
+        self.assertEqual(self.replies(), [{"id": 9, "ok": False, "error": OUT_OF_MEMORY}])
+
     def test_overlong_line_is_dropped_and_parsing_resumes(self):
         self.proto.feed(b"x" * (MAX_LINE + 1))
-        self.proto.feed(b'still the same line\n{"id": 3, "cmd": "echo"}\n')
-        replies = self.replies()
-        self.assertFalse(replies[0]["ok"])
-        self.assertEqual(replies[1]["id"], 3)
-        self.assertEqual(len(replies), 2)
+        self.assertEqual(self.out, [])  # the reply waits for the line to end, to carry its id
+        self.proto.feed(b'still the same line", "id": 12, "cmd": "set_config"}\n{"id": 3, "cmd": "echo"}\n')
+        self.assertEqual(self.replies(), [
+            {"id": 12, "ok": False, "error": TOO_LONG},
+            {"id": 3, "ok": True, "value": None},
+        ])
 
 
 class PathTests(unittest.TestCase):
@@ -125,14 +176,19 @@ class FilesTests(unittest.TestCase):
         self.call("fs_delete", path="notes.txt")
         self.assertEqual(self.call("fs_list")["entries"], [])
 
-    def test_save_text_replaces_and_load_falls_back_to_tmp(self):
-        self.files.save_text("config.json", "one")
-        self.files.save_text("config.json", "two")
-        self.assertEqual(self.files.load_text("config.json"), "two")
+    def test_save_json_replaces_and_load_falls_back_to_tmp(self):
+        self.files.save_json("config.json", {"n": 1})
+        self.files.save_json("config.json", {"n": 2})
+        self.assertEqual(self.files.load_json("config.json"), {"n": 2})
+        self.assertFalse(os.path.exists(os.path.join(self.tmp.name, "config.json.tmp")))
         os.rename(os.path.join(self.tmp.name, "config.json"),
                   os.path.join(self.tmp.name, "config.json.tmp"))
-        self.assertEqual(self.files.load_text("config.json"), "two")
-        self.assertIsNone(self.files.load_text("missing.json"))
+        self.assertEqual(self.files.load_json("config.json"), {"n": 2})
+        self.assertIsNone(self.files.load_json("missing.json"))
+        with open(os.path.join(self.tmp.name, "broken.json"), "w") as f:
+            f.write("{nope")
+        with self.assertRaises(ValueError):
+            self.files.load_json("broken.json")
 
     def test_read_only_mode_refuses_writes(self):
         handlers = file_handlers(self.files, False)

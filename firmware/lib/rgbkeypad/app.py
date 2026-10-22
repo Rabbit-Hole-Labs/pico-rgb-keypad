@@ -91,7 +91,7 @@ class App:
         if self.port:
             self.port.timeout = 0
             self.port.write_timeout = 1
-        self.proto = Protocol(self._write)
+        self.proto = Protocol(self._write, self._dump)
         self.leds = Leds()
         self.keypad = Keypad()
         self.engine = Engine(Hid(), self.emit)
@@ -110,23 +110,32 @@ class App:
         self.proto.on("reboot", self.cmd_reboot)
 
     def _load_config(self):
-        text = self.files.load_text(CONFIG_PATH)
-        if text is None:
-            cfg = default_config()
-            if self.writable:
-                self.files.save_text(CONFIG_PATH, json.dumps(cfg))
-            return cfg, None
         try:
-            return normalize(json.loads(text)), None
-        except ValueError as error:  # ConfigError is a ValueError, as is bad JSON
+            saved = self.files.load_json(CONFIG_PATH)
+            if saved is not None:
+                return normalize(saved), None
+        except ValueError as error:  # bad JSON, or a ConfigError (also a ValueError)
             print("config.json ignored:", error)
             return default_config(), "config.json was ignored: %s" % error
+        cfg = default_config()
+        if self.writable:
+            self.files.save_json(CONFIG_PATH, cfg)
+        return cfg, None
 
     def _write(self, data):
         port = self.port
         if port is not None and port.connected:
             try:
                 port.write(data)
+            except OSError:
+                pass
+
+    def _dump(self, message):
+        port = self.port
+        if port is not None and port.connected:
+            try:
+                json.dump(message, port)
+                port.write(b"\n")
             except OSError:
                 pass
 
@@ -154,16 +163,18 @@ class App:
         return {"config": self.config}
 
     def cmd_set_config(self, msg):
-        cfg = normalize(msg.get("config"))
-        compiled = compile_config(cfg)
-        self.engine.load(compiled, supervisor.ticks_ms())
+        # Memory is tight: drop each intermediate form as soon as the next exists.
+        cfg = normalize(msg.pop("config", None))
+        gc.collect()
+        self.engine.load(compile_config(cfg), supervisor.ticks_ms())
         self.config = cfg
         self.config_error = None
+        gc.collect()
         if not msg.get("save"):
             return {"saved": False}
         if not self.writable:
             return {"ok": False, "applied": True, "error": READ_ONLY_MESSAGE}
-        self.files.save_text(CONFIG_PATH, json.dumps(cfg))
+        self.files.save_json(CONFIG_PATH, cfg)
         return {"saved": True}
 
     def cmd_set_layer(self, msg):

@@ -7,9 +7,9 @@ import {
   keyFromDomCode,
 } from './codes.js';
 import {
-  MAX_DELAY_MS, MAX_LABEL, MAX_LAYERS, MAX_STEPS, MAX_TEXT, MAX_TYPE_DELAY_MS, NUM_KEYS,
-  actionOfType, blankConfig, blankLayer, cellToKey, describeAction, layerWarnings, moveLayer,
-  parsePath, removeLayer, untypeable, validate,
+  MAX_CONFIG_BYTES, MAX_DELAY_MS, MAX_LABEL, MAX_LAYERS, MAX_STEPS, MAX_TEXT, MAX_TYPE_DELAY_MS,
+  NUM_KEYS, actionOfType, blankConfig, blankLayer, cellToKey, configBytes, describeAction,
+  layerWarnings, moveLayer, parsePath, printedLabel, removeLayer, untypeable, validate,
 } from './config.js';
 import { PORT_FILTERS, closeKeypad, openKeypad, serialSupported } from './device.js';
 import { compareVersions, installFirmware, loadBundle } from './firmware.js';
@@ -147,10 +147,11 @@ function changed({ panel = false } = {}) {
 }
 
 function describeError(error) {
+  if (error.path === 'config') return error.detail;
   const { layer, key, field: path } = parsePath(error.path);
   const parts = [];
   if (layer !== null) parts.push(state.config.layers[layer]?.name || `Layer ${layer + 1}`);
-  if (key !== null) parts.push(`key ${key + 1}`);
+  if (key !== null) parts.push(`key ${printedLabel(key)}`);
   const step = /steps\[(\d+)\]/.exec(path || '');
   if (step) parts.push(`macro step ${Number(step[1]) + 1}`);
   else if (path && !path.startsWith('action')) parts.push(path.replace(/_/g, ' '));
@@ -539,7 +540,7 @@ function renderPad() {
         type: 'button',
         class: classes.join(' '),
         style: `--led: ${color}`,
-        'aria-label': `Key ${i + 1}${key.label ? `, ${key.label}` : ''}${desc ? `, ${desc}` : ''}`,
+        'aria-label': `Key ${printedLabel(i)}${key.label ? `, ${key.label}` : ''}${desc ? `, ${desc}` : ''}`,
         'aria-pressed': String(i === state.key),
         onclick: () => {
           cancelRecording();
@@ -550,7 +551,7 @@ function renderPad() {
           renderPanel();
         },
       },
-      h('span', { class: 'key-num', 'aria-hidden': 'true' }, i + 1),
+      h('span', { class: 'key-num', 'aria-hidden': 'true', title: 'Printed on the keypad' }, printedLabel(i)),
       key.label ? h('span', { class: 'key-label' }, key.label) : null,
       desc ? h('span', { class: 'key-desc' }, desc) : null));
     }
@@ -636,7 +637,7 @@ function keyPanel() {
   return h('div', {},
     h('div', { class: 'panel-head' },
       h('div', {},
-        h('h2', {}, `Key ${state.key + 1}`),
+        h('h2', {}, `Key ${printedLabel(state.key)}`),
         hint(`${layerAt().name} layer · ${positionText(state.key)} with the USB port at the `
           + `${ROTATION_CHOICES.find(([r]) => r === (state.config.rotation ?? 0))[1].toLowerCase()}`)),
       h('div', { class: 'row' },
@@ -964,6 +965,10 @@ function settingsPanel() {
     field('USB port position',
       segmented(ROTATION_CHOICES, cfg.rotation ?? 0, (r) => { cfg.rotation = r; changed({ panel: true }); }, 'USB port position'),
       hint('Turn the on-screen keypad to match how yours sits on the desk.')),
+    field('Layout size', h('div', { class: 'progress', title: 'How much of the keypad’s room for a layout this uses' },
+      h('div', { style: `width: ${Math.min(100, Math.round(((state.check.bytes ?? configBytes(cfg)) / MAX_CONFIG_BYTES) * 100))}%` })),
+    hint(`${((state.check.bytes ?? configBytes(cfg)) / 1024).toFixed(1)} KB of ${MAX_CONFIG_BYTES / 1024} KB. `
+      + 'Long typed text takes the most room.')),
     h('h3', {}, 'Backup'),
     h('div', { class: 'row' },
       button('Export config…', () => downloadJSON(state.check.valid ? state.check.config : cfg, 'keypad-config.json')),

@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 
 import {
   ConfigError, blankConfig, blankLayer, cellToKey, describeAction, layerWarnings, moveLayer, normalize,
-  parsePath, removeLayer, untypeable, validate,
+  parsePath, printedLabel, removeLayer, untypeable, validate,
 } from '../../web/js/config.js';
 
 const cases = JSON.parse(readFileSync(new URL('../fixtures/config-cases.json', import.meta.url)));
@@ -23,6 +23,16 @@ test('shared cases match the firmware validator', async (t) => {
       }
     });
   }
+});
+
+test('validate() refuses a layout too big for the keypad', () => {
+  const cfg = blankConfig();
+  for (const key of cfg.layers[0].keys) key.action = { type: 'text', text: 'x'.repeat(1000) };
+  const result = validate(cfg);
+  assert.equal(result.valid, false);
+  assert.equal(result.error.path, 'config');
+  assert.match(result.error.detail, /KB the keypad has room for/);
+  assert.ok(validate(blankConfig()).bytes < 2048);
 });
 
 test('blank config is valid and validate() does not throw', () => {
@@ -59,6 +69,18 @@ test('cellToKey matches the measured layout and each rotation', () => {
     for (let y = 0; y < 4; y += 1) for (let x = 0; x < 4; x += 1) seen.add(cellToKey(x, y, r));
     assert.equal(seen.size, 16, `rotation ${r} covers every key once`);
   }
+});
+
+test('printedLabel names keys by the characters printed on the board', () => {
+  // Checked on a real board: with the USB port on the left, 0 is top-left and 3 is
+  // top-right; with it at the top, key index 0 is top-left, beside the printed C.
+  assert.equal(printedLabel(3), '0');
+  assert.equal(printedLabel(15), '3');
+  assert.equal(printedLabel(5), '9');
+  assert.equal(printedLabel(0), 'C');
+  assert.equal(printedLabel(12), 'F');
+  const rowsWithUsbLeft = [0, 1, 2, 3].map((y) => [0, 1, 2, 3].map((x) => printedLabel(cellToKey(x, y, 270))).join(''));
+  assert.deepEqual(rowsWithUsbLeft, ['0123', '4567', '89AB', 'CDEF']);
 });
 
 function threeLayers() {

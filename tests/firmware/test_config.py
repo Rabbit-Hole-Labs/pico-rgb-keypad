@@ -30,8 +30,7 @@ class SharedCases(unittest.TestCase):
 
 class Defaults(unittest.TestCase):
     def test_default_config_is_valid_and_stable(self):
-        cfg = default_config()
-        self.assertEqual(normalize(cfg), cfg)
+        self.assertEqual(normalize(default_config()), default_config())
 
     def test_default_config_is_fresh_each_call(self):
         a = default_config()

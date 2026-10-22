@@ -9,6 +9,7 @@ directory in tests; CircuitPython has no os.path, so paths are joined by hand.
 """
 
 import binascii
+import json
 import os
 
 STAGED = ".new"
@@ -58,21 +59,24 @@ class Files:
         if sync:
             sync()
 
-    def load_text(self, path):
-        """Read a file saved by save_text, or None if neither copy exists."""
+    def load_json(self, path):
+        """Parse a file saved by save_json, or None if neither copy exists.
+        Raises ValueError if the file isn't valid JSON."""
         for candidate in (path, path + ".tmp"):
             try:
-                with open(self.full(candidate), "r") as f:
-                    return f.read()
+                f = open(self.full(candidate), "r")
             except OSError:
-                pass
+                continue
+            with f:
+                return json.load(f)
         return None
 
-    def save_text(self, path, text):
-        """Replace a file so a power cut leaves either the old or the new copy."""
+    def save_json(self, path, value):
+        """Replace a file so a power cut leaves either the old or the new copy.
+        json.dump streams to the file, so no second copy of the text is built."""
         full = self.full(path)
         with open(full + ".tmp", "w") as f:
-            f.write(text)
+            json.dump(value, f)
         if self._stat(full) is not None:
             os.remove(full)
         os.rename(full + ".tmp", full)

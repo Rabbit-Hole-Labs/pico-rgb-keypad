@@ -44,7 +44,7 @@ root.
 
 | Area | What it does |
 | --- | --- |
-| Keypad grid | Click a key to edit it. Keys glow in their LED color and highlight while you press them on the real keypad. |
+| Keypad grid | Click a key to edit it. Each key is named by the character printed beside it on the board (0–F). Keys glow in their LED color and highlight while you press them on the real keypad. |
 | Key tab | Label (shown on this page only), color, and the action: **Shortcut**, **Type text**, **Media**, **Macro** or **Layer**. **● Record** captures a shortcut from your keyboard. |
 | Layer tab | Rename, reorder, duplicate or delete layers. It warns about a layer you can't reach, or one you can switch to but never leave. |
 | Settings tab | Brightness, pressed-key color, idle LED timeout, delay between typed characters, which side the USB port is on, and export, import and reset. |
@@ -53,6 +53,13 @@ root.
 Every edit is sent to the keypad as a preview. **Save to keypad** (⌘S) stores it in the keypad's
 `config.json`, and **Revert** goes back to the saved version. Unsaved edits also survive a page
 reload in this browser.
+
+Set **USB port position** in Settings to match your desk. With the USB port on the left, the
+printed characters read upright and the grid reads 0123 / 4567 / 89AB / CDEF like the board.
+
+A layout can be up to 12 KB, and the Settings tab shows how much you're using. The keypad holds
+the whole layout in about 90 KB of RAM. Long typed text is cheap; the worst case is many small
+macro steps. The editor won't send a layout over the limit.
 
 Typed text uses the US keyboard layout. It supports printable ASCII plus Return and Tab, and the
 editor flags anything else. If an app drops characters, raise **Pause between typed characters**
@@ -73,9 +80,12 @@ at boot, the firmware starts in USB drive mode so a bare Pico never hides its dr
 ## Hardware notes
 
 Pins follow Pimoroni's C driver: a TCA9555 key expander on I2C0 (GP4 SDA, GP5 SCL, address
-`0x20`) and 16 APA102 LEDs on SPI0 (GP18 SCK, GP19 MOSI) gated by CS on GP17. Key *n* and LED
-*n* are the same pad. With the USB port at the top, key 1 (index 0) is top-left, and numbering
-runs left to right, then top to bottom. This was checked on a real board.
+`0x20`) and 16 APA102 LEDs on SPI0 (GP18 SCK, GP19 MOSI) gated by CS on GP17. Key index *n*
+(expander bit *n*) and LED *n* are the same pad. With the USB port at the top, index 0 is
+top-left, and indexes run left to right, then top to bottom. The characters printed on the
+board read upright with the USB port on the left (0 top-left, F bottom-right), so index 0 is
+the key printed C. `printedLabel()` in `web/js/config.js` maps between the two. Both orders
+were checked on a real board.
 
 ## Project layout
 

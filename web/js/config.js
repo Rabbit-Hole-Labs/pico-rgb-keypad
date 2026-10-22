@@ -156,12 +156,27 @@ export function normalize(cfg) {
   };
 }
 
-/** {valid, config, error} without throwing; error carries .path for the UI. */
+// The keypad parses a whole layout in RAM (about 90 KB free on a Pico). Measured on
+// a Pico with CircuitPython 10.3, replacing a loaded layout with a same-size one (as
+// live preview does): the worst shape, every key a one-step macro, worked at 13.6 KB
+// and failed at 14.3 KB; long typed text worked up to 18 KB. The firmware refuses
+// messages over 16 KB (MAX_LINE in firmware/lib/rgbkeypad/protocol.py).
+export const MAX_CONFIG_BYTES = 12 * 1024;
+
+export const configBytes = (cfg) => new TextEncoder().encode(JSON.stringify(cfg)).length;
+
+/** {valid, config, error, bytes} without throwing; error carries .path for the UI. */
 export function validate(cfg) {
   try {
-    return { valid: true, config: normalize(cfg), error: null };
+    const config = normalize(cfg);
+    const bytes = configBytes(config);
+    if (bytes > MAX_CONFIG_BYTES) {
+      throw new ConfigError('config', `The layout is ${(bytes / 1024).toFixed(1)} KB, more than the `
+        + `${MAX_CONFIG_BYTES / 1024} KB the keypad has room for. Shorten long text or remove layers.`);
+    }
+    return { valid: true, config, error: null, bytes };
   } catch (error) {
-    if (error instanceof ConfigError) return { valid: false, config: null, error };
+    if (error instanceof ConfigError) return { valid: false, config: null, error, bytes: null };
     throw error;
   }
 }
@@ -246,6 +261,13 @@ export function layerWarnings(cfg) {
   }
   return { unreachable, stuck };
 }
+
+// Characters printed beside the keys on the keypad base, used as key names so a
+// key on screen and on the desk have the same name. They read upright with the
+// USB port on the left (0 1 2 3 across the top row), so they run in a different
+// order from key indexes, which start top-left with the USB port at the top.
+const PRINTED = '0123456789ABCDEF';
+export const printedLabel = (index) => PRINTED[(3 - (index % 4)) * 4 + Math.floor(index / 4)];
 
 /**
  * Key index shown at grid cell (x, y) when the keypad sits with its USB port

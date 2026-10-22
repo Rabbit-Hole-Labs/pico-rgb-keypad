@@ -228,7 +228,7 @@ input[type="range"] { accent-color: var(--accent); width: 100%; }
 }
 .key-label { font-weight: 650; font-size: 12.5px; line-height: 1.15; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55); overflow-wrap: anywhere; }
 .key-desc { font-size: 11px; opacity: 0.85; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.key-num { position: absolute; top: 5px; left: 7px; font-size: 10px; opacity: 0.5; }
+.key-num { position: absolute; top: 5px; left: 7px; font-size: 11px; font-weight: 600; opacity: 0.7; font-family: var(--mono); }
 .key.selected { outline: 3px solid var(--accent); outline-offset: 3px; }
 .key.down { transform: scale(0.95); filter: brightness(1.45); }
 .key.down:not(.lit) { background: #4a525e; }

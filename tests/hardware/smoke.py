@@ -2,7 +2,8 @@
 
     python3 tests/hardware/smoke.py /dev/cu.usbmodemXXXX3
 
-Pass the keypad's data port (the second of its two serial ports). The test
+Pass the keypad's data port: its only serial port in normal mode, or the
+second of its two in USB drive mode (the first is the Python console). The test
 changes nothing permanently: the config it sends is not saved, the file it
 uploads is staged and then discarded, and the original layer is restored. It
 never presses keys on the computer; a key only types if you press it.

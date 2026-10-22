@@ -200,8 +200,9 @@ def _action(action, where, layer_count):
             _fail(where + ".steps", "needs at least one step")
         if len(steps) > MAX_STEPS:
             _fail(where + ".steps", "has more than %d steps" % MAX_STEPS)
-        return {"type": kind, "steps": [
-            _step(s, "%s.steps[%d]" % (where, i)) for i, s in enumerate(steps)]}
+        for i, s in enumerate(steps):
+            steps[i] = _step(s, "%s.steps[%d]" % (where, i))
+        return {"type": kind, "steps": steps}
     if kind == "layer":
         mode = action.get("mode")
         if mode not in LAYER_MODES:
@@ -213,7 +214,12 @@ def _action(action, where, layer_count):
 
 
 def normalize(cfg):
-    """Return a clean copy of cfg, or raise ConfigError naming the bad field."""
+    """Return the clean form of cfg, or raise ConfigError naming the bad field.
+
+    To fit in a Pico's RAM, the result reuses cfg's lists: each key is replaced by
+    its clean form as it's checked, so the raw one can be freed straight away
+    instead of two whole layouts being held at once. Don't use cfg afterwards.
+    """
     if not isinstance(cfg, dict):
         _fail("config", "must be an object")
     if cfg.get("version", 1) != 1:
@@ -230,7 +236,6 @@ def normalize(cfg):
         _fail("layers", "needs at least one layer")
     if len(layers) > MAX_LAYERS:
         _fail("layers", "has more than %d layers" % MAX_LAYERS)
-    out_layers = []
     for li, layer in enumerate(layers):
         where = "layers[%d]" % li
         if not isinstance(layer, dict):
@@ -238,21 +243,20 @@ def normalize(cfg):
         keys = layer.get("keys")
         if not isinstance(keys, list) or len(keys) != NUM_KEYS:
             _fail(where + ".keys", "must list exactly %d keys" % NUM_KEYS)
-        out_keys = []
         for ki, key in enumerate(keys):
             kw = "%s.keys[%d]" % (where, ki)
             if not isinstance(key, dict):
                 _fail(kw, "must be an object")
-            out_keys.append({
+            keys[ki] = {
                 "label": _str(key.get("label", ""), kw + ".label", MAX_LABEL),
                 "color": _color(key.get("color", "#000000"), kw + ".color"),
                 "action": _action(key.get("action"), kw + ".action", len(layers)),
-            })
-        out_layers.append({
+            }
+        layers[li] = {
             "name": _str(layer.get("name", "Layer %d" % (li + 1)), where + ".name",
                          MAX_LABEL, allow_empty=False),
-            "keys": out_keys,
-        })
+            "keys": keys,
+        }
     return {
         "version": 1,
         "brightness": float(brightness),
@@ -260,7 +264,7 @@ def normalize(cfg):
         "idle_timeout": _int(cfg.get("idle_timeout", 0), "idle_timeout", 0, MAX_IDLE_S),
         "type_delay": _int(cfg.get("type_delay", 0), "type_delay", 0, MAX_TYPE_DELAY_MS),
         "rotation": rotation,
-        "layers": out_layers,
+        "layers": layers,
     }
 
 
