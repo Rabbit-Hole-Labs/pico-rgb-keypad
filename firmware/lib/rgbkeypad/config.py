@@ -17,6 +17,7 @@ MAX_COMBO = 8
 MAX_IDLE_S = 3600
 MAX_TYPE_DELAY_MS = 200
 LAYER_MODES = ("to", "hold", "next")
+BLINK_CHOICES = ("key", "off")  # or a "#rrggbb" color
 STEP_OPS = ("tap", "down", "up", "text", "media", "delay")
 ROTATIONS = (0, 90, 180, 270)
 
@@ -76,7 +77,7 @@ def default_config():
             {"op": "tap", "keys": ["ENTER"]},
             {"op": "delay", "ms": 50},
             {"op": "text", "text": "Your Name"},
-        ]}),
+        ], "blink": "key"}),
         _next_layer(white),
     ]
     return {
@@ -132,6 +133,16 @@ def _color(value, where):
     except ValueError:
         _fail(where, "must be a color like #ff8800")
     return value.lower()
+
+
+def _blink(value, where):
+    """What a key shows while its macro runs: "key" blinks its own color, "off"
+    doesn't blink, and a color blinks that color."""
+    if value in BLINK_CHOICES:
+        return value
+    if not isinstance(value, str) or len(value) != 7 or value[0] != "#":
+        _fail(where, 'must be "key", "off" or a color like #ff8800')
+    return _color(value, where)
 
 
 def parse_color(value):
@@ -202,7 +213,8 @@ def _action(action, where, layer_count):
             _fail(where + ".steps", "has more than %d steps" % MAX_STEPS)
         for i, s in enumerate(steps):
             steps[i] = _step(s, "%s.steps[%d]" % (where, i))
-        return {"type": kind, "steps": steps}
+        return {"type": kind, "steps": steps,
+                "blink": _blink(action.get("blink", "key"), where + ".blink")}
     if kind == "layer":
         mode = action.get("mode")
         if mode not in LAYER_MODES:
@@ -301,9 +313,14 @@ def compile_action(action):
     if kind == "media":
         return ("media", MEDIA[action["code"]])
     if kind == "text":
-        return ("seq", (("text", action["text"]),))
+        return ("seq", (("text", action["text"]),), None)
     if kind == "macro":
-        return ("seq", _compile_steps(action["steps"]))
+        blink = action["blink"]
+        if blink not in BLINK_CHOICES:
+            blink = parse_color(blink)
+        elif blink == "off":
+            blink = None
+        return ("seq", _compile_steps(action["steps"]), blink)
     if kind == "layer":
         return ("layer", action["mode"], action["layer"])
     return None

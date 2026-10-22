@@ -7,6 +7,8 @@ with a Raspberry Pi Pico or Pico 2.
 - **Hotkeys and macros.** Each of the 16 keys can send a shortcut (held while you hold the key),
   type text, press a media key, run a multi-step macro (shortcuts, text, waits, media keys,
   hold/release), or switch layers. There can be up to 8 layers.
+- **Running macros blink.** While a macro runs, its key blinks in its own color or a color you
+  pick for that macro, so you can tell it's still going.
 - **Colors.** Each key has its own LED color. You also set the brightness, the color a key shows
   while pressed, and an optional idle timeout that turns the LEDs off.
 - **No software to install.** The keypad is a standard USB keyboard and media controller. The
@@ -161,7 +163,9 @@ Each layer has exactly 16 keys. These are the action types:
 - `keys` with `keys`, a list of names
 - `text` with `text`
 - `media` with `code`
-- `macro` with `steps`. A step's `op` is `tap`, `down`, `up`, `text`, `media` or `delay`.
+- `macro` with `steps` and `blink`. A step's `op` is `tap`, `down`, `up`, `text`, `media` or
+  `delay`. `blink` sets what the key shows while the macro runs: `key` (its own color, the
+  default), `off`, or a color like `#ff8800`.
 - `layer` with `mode` (`to`, `hold` or `next`) and `layer`
 
 Key and media names are the `adafruit_hid` constant names, such as `LEFT_GUI`, `F13` or

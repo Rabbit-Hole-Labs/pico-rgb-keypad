@@ -14,6 +14,7 @@ export const MAX_COMBO = 8;
 export const MAX_IDLE_S = 3600;
 export const MAX_TYPE_DELAY_MS = 200;
 export const LAYER_MODES = ['to', 'hold', 'next'];
+export const BLINK_CHOICES = ['key', 'off']; // or a '#rrggbb' color
 export const STEP_OPS = ['tap', 'down', 'up', 'text', 'media', 'delay'];
 export const ROTATIONS = [0, 90, 180, 270];
 
@@ -65,6 +66,16 @@ function color(value, where) {
   return value.toLowerCase();
 }
 
+// What a key shows while its macro runs: 'key' blinks its own color, 'off'
+// doesn't blink, and a color blinks that color.
+function blink(value, where) {
+  if (BLINK_CHOICES.includes(value)) return value;
+  if (typeof value !== 'string' || !/^#[0-9a-fA-F]{6}$/.test(value)) {
+    fail(where, 'must be "key", "off" or a color like #ff8800');
+  }
+  return value.toLowerCase();
+}
+
 function keyList(value, where, allowEmpty) {
   if (!Array.isArray(value)) fail(where, 'must be a list of key names');
   if (!value.length && !allowEmpty) fail(where, 'needs at least one key');
@@ -105,7 +116,8 @@ function action(a, where, layerCount) {
   if (type === 'macro') {
     if (!Array.isArray(a.steps) || !a.steps.length) fail(`${where}.steps`, 'needs at least one step');
     if (a.steps.length > MAX_STEPS) fail(`${where}.steps`, `has more than ${MAX_STEPS} steps`);
-    return { type, steps: a.steps.map((s, i) => step(s, `${where}.steps[${i}]`)) };
+    const steps = a.steps.map((s, i) => step(s, `${where}.steps[${i}]`));
+    return { type, steps, blink: blink(a.blink ?? 'key', `${where}.blink`) };
   }
   if (type === 'layer') {
     if (!LAYER_MODES.includes(a.mode)) fail(`${where}.mode`, `must be one of ${LAYER_MODES.join(', ')}`);
@@ -314,10 +326,10 @@ export function actionOfType(type, previous = {}) {
     case 'media': return { type, code: previous.type === 'media' ? previous.code : 'PLAY_PAUSE' };
     case 'macro': {
       // Turning a shortcut or text into a macro keeps it as the first step.
-      if (previous.type === 'macro') return { type, steps: previous.steps };
-      if (previous.type === 'keys' && previous.keys?.length) return { type, steps: [{ op: 'tap', keys: previous.keys }] };
-      if (previous.type === 'text' && previous.text) return { type, steps: [{ op: 'text', text: previous.text }] };
-      return { type, steps: [] };
+      if (previous.type === 'macro') return { type, steps: previous.steps, blink: previous.blink ?? 'key' };
+      if (previous.type === 'keys' && previous.keys?.length) return { type, steps: [{ op: 'tap', keys: previous.keys }], blink: 'key' };
+      if (previous.type === 'text' && previous.text) return { type, steps: [{ op: 'text', text: previous.text }], blink: 'key' };
+      return { type, steps: [], blink: 'key' };
     }
     case 'layer': return { type, mode: 'to', layer: 0 };
     default: return { type: 'none' };

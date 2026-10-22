@@ -5,7 +5,7 @@ from _path import FIRMWARE  # noqa: F401  (puts firmware/lib on sys.path)
 from rgbkeypad.codes import KEYS, MEDIA
 from rgbkeypad.config import compile_config, normalize
 from rgbkeypad.engine import (
-    FLASH_MS, IDENTIFY_MS, OFF, TICKS_PERIOD, WHITE, Engine, ticks_add, ticks_diff)
+    BLINK_MS, FLASH_MS, IDENTIFY_MS, OFF, TICKS_PERIOD, WHITE, Engine, ticks_add, ticks_diff)
 
 A, B, SHIFT, GUI = KEYS["A"], KEYS["B"], KEYS["LEFT_SHIFT"], KEYS["LEFT_GUI"]
 
@@ -242,6 +242,61 @@ class Macros(unittest.TestCase):
         engine.load(compile_config(normalize({"layers": [{"name": "x", "keys": blank()}]})), 2)
         self.assertFalse(engine.busy())
         self.assertIn(("release_all",), hid.log)
+
+
+class MacroBlink(unittest.TestCase):
+    """A key blinks while its macro is queued or running (BLINK_MS on, BLINK_MS off)."""
+
+    def run_slow_macro(self, color="#ff0000", **action):
+        keys = blank()
+        keys[0]["color"] = color
+        keys[0]["action"] = dict({"type": "macro", "steps": [{"op": "delay", "ms": 1000}]}, **action)
+        engine, _, _ = make(keys, highlight="#ffffff")
+        engine.key_event(0, True, 0)
+        engine.key_event(0, False, 10)
+        engine.tick(10)  # starts the 1000 ms wait
+        return engine
+
+    def test_blinks_the_key_color_until_the_macro_ends(self):
+        engine = self.run_slow_macro()
+        self.assertEqual(engine.render(20)[0][0], (255, 0, 0))
+        self.assertEqual(engine.render(BLINK_MS + 10)[0][0], OFF)
+        self.assertEqual(engine.render(2 * BLINK_MS + 10)[0][0], (255, 0, 0))
+        self.assertEqual(engine.render(3 * BLINK_MS + 10)[0][0], OFF)
+        engine.tick(1010)  # wait over, macro ends
+        self.assertEqual(engine.runs, {})
+        self.assertEqual(engine.render(4 * BLINK_MS + 20)[0][0], (255, 0, 0))
+        self.assertIsNone(engine.render(5 * BLINK_MS + 10))  # steady, no more blinking
+
+    def test_blinks_a_chosen_color(self):
+        engine = self.run_slow_macro(blink="#00ff00")
+        self.assertEqual(engine.render(20)[0][0], (0, 255, 0))
+
+    def test_unlit_key_blinks_the_highlight_color(self):
+        engine = self.run_slow_macro(color="#000000")
+        self.assertEqual(engine.render(20)[0][0], WHITE)
+
+    def test_off_means_no_blink(self):
+        engine = self.run_slow_macro(blink="off")
+        self.assertEqual(engine.runs, {})
+        engine.render(FLASH_MS)
+        self.assertIsNone(engine.render(BLINK_MS + 10))  # nothing changes while it runs
+
+    def test_queued_presses_keep_blinking_until_the_last_run_ends(self):
+        engine = self.run_slow_macro()
+        engine.key_event(0, True, 20)
+        engine.key_event(0, False, 30)
+        engine.tick(1010)  # first run ends, second starts its wait
+        self.assertIn(0, engine.runs)
+        engine.tick(2010)
+        self.assertEqual(engine.runs, {})
+
+    def test_typed_text_does_not_blink(self):
+        keys = blank()
+        keys[0]["action"] = {"type": "text", "text": "abc"}
+        engine, _, _ = make(keys)
+        engine.key_event(0, True, 0)
+        self.assertEqual(engine.runs, {})
 
 
 class Leds(unittest.TestCase):

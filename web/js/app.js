@@ -842,7 +842,32 @@ function macroEditor(action) {
       button('+ Media key', () => add('media'), { class: 'btn small' }),
       button('+ Hold / release', () => add('down'), { class: 'btn small' })),
     h('p', { class: 'hint', style: 'margin-top: 10px' },
-      'Steps run in order each time the key is pressed. Keys still held down when the macro ends are released.'));
+      'Steps run in order each time the key is pressed. Keys still held down when the macro ends are released.'),
+    blinkField(action));
+}
+
+/** What the key shows while its macro runs: its own color, a chosen color, or nothing. */
+function blinkField(action) {
+  const blink = action.blink ?? 'key';
+  const mode = blink === 'key' || blink === 'off' ? blink : 'color';
+  return h('div', { class: 'field', style: 'margin-top: 14px' },
+    h('div', { class: 'label' }, 'While it runs'),
+    segmented([['key', 'Blink its color'], ['color', 'Blink another color'], ['off', 'Don’t blink']], mode, (next) => {
+      action.blink = next === 'color' ? (mode === 'color' ? blink : '#ff3d6e') : next;
+      changed({ panel: true });
+    }, 'While the macro runs'),
+    mode === 'color' ? h('div', { class: 'swatches' },
+      h('input', {
+        type: 'color', value: blink, 'aria-label': 'Blink color',
+        oninput: (e) => { action.blink = e.target.value; changed(); },
+      }),
+      SWATCHES.map((c) => h('button', {
+        type: 'button', class: 'swatch', style: `background: ${c}`, title: c, 'aria-label': `Blink ${c}`,
+        'aria-pressed': String(blink === c),
+        onclick: () => { action.blink = c; changed({ panel: true }); },
+      }))) : null,
+    hint(mode === 'off' ? 'The key shows its usual color while the macro runs.'
+      : 'The key blinks until the macro finishes, so you can tell it’s still running.'));
 }
 
 function layerActionEditor(action) {

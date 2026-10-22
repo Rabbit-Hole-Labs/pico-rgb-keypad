@@ -624,7 +624,8 @@
           "op": "media",
           "code": "MUTE"
          }
-        ]
+        ],
+        "blink": "key"
        }
       },
       {
@@ -4825,5 +4826,805 @@
    "type_delay": 500
   },
   "error": "type_delay"
+ },
+ {
+  "name": "macro blink color is lowercased",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "macro",
+        "steps": [
+         {
+          "op": "delay",
+          "ms": 5
+         }
+        ],
+        "blink": "#FF8800"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": null,
+  "normalized": {
+   "version": 1,
+   "brightness": 0.4,
+   "highlight": "#ffffff",
+   "idle_timeout": 0,
+   "type_delay": 0,
+   "rotation": 0,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "macro",
+        "steps": [
+         {
+          "op": "delay",
+          "ms": 5
+         }
+        ],
+        "blink": "#ff8800"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "macro blink off",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "macro",
+        "steps": [
+         {
+          "op": "delay",
+          "ms": 5
+         }
+        ],
+        "blink": "off"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": null,
+  "normalized": {
+   "version": 1,
+   "brightness": 0.4,
+   "highlight": "#ffffff",
+   "idle_timeout": 0,
+   "type_delay": 0,
+   "rotation": 0,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "macro",
+        "steps": [
+         {
+          "op": "delay",
+          "ms": 5
+         }
+        ],
+        "blink": "off"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "macro blink bad value",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "macro",
+        "steps": [
+         {
+          "op": "delay",
+          "ms": 5
+         }
+        ],
+        "blink": "red"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[0].action.blink"
+ },
+ {
+  "name": "macro blink bad color",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "macro",
+        "steps": [
+         {
+          "op": "delay",
+          "ms": 5
+         }
+        ],
+        "blink": "#12345"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[0].action.blink"
  }
 ]

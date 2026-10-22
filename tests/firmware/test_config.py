@@ -59,17 +59,23 @@ class Compile(unittest.TestCase):
         self.assertEqual(compile_action({"type": "media", "code": "MUTE"}),
                          ("media", MEDIA["MUTE"]))
         self.assertEqual(compile_action({"type": "text", "text": "hi"}),
-                         ("seq", (("text", "hi"),)))
+                         ("seq", (("text", "hi"),), None))
         self.assertEqual(compile_action({"type": "layer", "mode": "hold", "layer": 1}),
                          ("layer", "hold", 1))
 
     def test_macro_tap_becomes_down_then_up(self):
-        action = {"type": "macro", "steps": [
+        action = {"type": "macro", "blink": "key", "steps": [
             {"op": "tap", "keys": ["A"]}, {"op": "delay", "ms": 10},
             {"op": "up", "keys": []}, {"op": "media", "code": "MUTE"}]}
         self.assertEqual(compile_action(action), ("seq", (
             ("down", (KEYS["A"],)), ("up", (KEYS["A"],)), ("wait", 10),
-            ("up", ()), ("media", MEDIA["MUTE"]))))
+            ("up", ()), ("media", MEDIA["MUTE"])), "key"))
+
+    def test_macro_blink_compiles_to_none_key_or_rgb(self):
+        steps = [{"op": "delay", "ms": 1}]
+        for blink, want in (("off", None), ("key", "key"), ("#00ff80", (0, 255, 128))):
+            action = {"type": "macro", "steps": steps, "blink": blink}
+            self.assertEqual(compile_action(action)[2], want)
 
     def test_compiled_layers_hold_colors_and_actions(self):
         compiled = compile_config(normalize(default_config()))
