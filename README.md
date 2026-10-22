@@ -31,19 +31,24 @@ with a Raspberry Pi Pico or Pico 2.
 3. **Unplug the keypad and plug it back in.** It starts with a starter layout for macOS (copy,
    paste, media keys, and so on) and hides the `CIRCUITPY` drive (see [Modes](#modes)). On
    Windows, set **Your computer** to Windows in Settings and click **Load starter layout**.
-4. **Open the configurator** in Chrome or Edge:
-
-   ```bash
-   npm run serve
-   ```
-
-   Then open <http://localhost:8000/web/>, click **Connect keypad**, and pick
+4. **Open the configurator** in Chrome or Edge at
+   <https://rabbit-hole-labs.github.io/pico-rgb-keypad/>, click **Connect keypad**, and pick
    "Pico RGB Keypad". Once you've allowed the port, the page reconnects by itself, including
    after the keypad restarts.
 
-The page must be served over `http://localhost` or `https://`. Opened as a file, it can't load
-firmware updates. Any static host works too, for example GitHub Pages serving the repository
-root.
+The page is hosted on GitHub Pages straight from this repository's `main` branch, so a push to
+`main` updates the site, including the firmware it offers to install. Your browser still talks to
+the keypad over your own USB cable; nothing about the keypad goes to GitHub.
+
+**Running it locally** (offline, or to try changes before pushing):
+
+```bash
+npm run serve
+```
+
+Then open <http://localhost:8000/web/>. The page must be served over `http://localhost` or
+`https://`. Opened as a file, it can't load firmware updates. `.nojekyll` at the repository root
+stops GitHub Pages from skipping files that start with `_`, such as `__init__.py`.
 
 **Using a different port.** `npm run serve` is defined in `package.json` as
 `python3 -m http.server 8000 --bind 127.0.0.1`. Change `8000` there, or skip npm and run that
