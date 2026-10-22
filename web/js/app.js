@@ -48,6 +48,7 @@ const state = {
   pressed: new Set(),
   pick: false,
   connecting: false,
+  userDisconnected: false, // clicked Disconnect: don't reconnect on our own until Connect
   restarting: false,
   notice: null,
   recording: null, // { id, apply, mods } while capturing a shortcut
@@ -237,7 +238,7 @@ async function connectPort(port, { quiet = false } = {}) {
 
 /** A port that just appeared may still be booting, so give it a few tries. */
 async function connectSoon(port) {
-  for (let attempt = 0; attempt < 6 && !state.conn; attempt += 1) {
+  for (let attempt = 0; attempt < 6 && !state.conn && !state.userDisconnected; attempt += 1) {
     if (await connectPort(port, { quiet: true })) return;
     await new Promise((r) => setTimeout(r, 1000));
   }
@@ -261,12 +262,14 @@ async function onConnectButton() {
   } catch {
     return; // picker closed
   }
+  state.userDisconnected = false;
   await connectPort(port);
 }
 
 async function disconnect() {
   const { conn } = state;
   if (!conn) return;
+  state.userDisconnected = true;
   if (state.pick) await conn.call('set_paused', { paused: false }).catch(() => {});
   await closeKeypad(conn);
 }
@@ -1150,7 +1153,7 @@ function init() {
 
   if (serialSupported()) {
     navigator.serial.addEventListener('connect', (e) => {
-      if (!state.conn) connectSoon(e.target);
+      if (!state.conn && !state.userDisconnected) connectSoon(e.target);
     });
     connectGranted();
   }
