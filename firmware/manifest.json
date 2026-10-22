@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "files": [
+    "boot.py",
+    "code.py",
+    "lib/rgbkeypad/__init__.py",
+    "lib/rgbkeypad/app.py",
+    "lib/rgbkeypad/codes.py",
+    "lib/rgbkeypad/config.py",
+    "lib/rgbkeypad/engine.py",
+    "lib/rgbkeypad/fs.py",
+    "lib/rgbkeypad/hardware.py",
+    "lib/rgbkeypad/protocol.py",
+    "lib/rgbkeypad/recovery.py",
+    "lib/adafruit_hid/__init__.mpy",
+    "lib/adafruit_hid/consumer_control.mpy",
+    "lib/adafruit_hid/consumer_control_code.mpy",
+    "lib/adafruit_hid/keyboard.mpy",
+    "lib/adafruit_hid/keyboard_layout_base.mpy",
+    "lib/adafruit_hid/keyboard_layout_us.mpy",
+    "lib/adafruit_hid/keycode.mpy"
+  ]
+}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pico RGB Keypad</title>
+  <meta name="description" content="Configure hotkeys, macros, colors and firmware for a Pimoroni Pico RGB Keypad over Web Serial.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2315181d'/%3E%3Cg fill='%237c9cff'%3E%3Crect x='6' y='6' width='8' height='8' rx='2'/%3E%3Crect x='18' y='6' width='8' height='8' rx='2' fill='%23ff9d00'/%3E%3Crect x='6' y='18' width='8' height='8' rx='2' fill='%2300b39b'/%3E%3Crect x='18' y='18' width='8' height='8' rx='2' fill='%23ff3d6e'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Pico RGB Keypad</div>
+    <div class="conn">
+      <span id="status" class="status" data-state="off">Not connected</span>
+      <button id="connect" class="btn primary" type="button">Connect keypad</button>
+    </div>
+  </header>
+
+  <div id="banners" class="banners" aria-live="polite"></div>
+
+  <main class="layout">
+    <section class="pad-col" aria-label="Keypad">
+      <nav id="layer-tabs" class="layer-tabs" aria-label="Layers"></nav>
+      <div id="pad" class="pad"></div>
+      <label class="pick" title="While on, pressing a key on the keypad selects it here and doesn’t run its action.">
+        <input type="checkbox" id="pick">
+        <span>Pick mode: press a key on the keypad to select it</span>
+      </label>
+      <div class="savebar">
+        <span id="save-state" class="save-state"></span>
+        <button id="revert" class="btn" type="button">Revert</button>
+        <button id="save" class="btn primary" type="button">Save to keypad</button>
+      </div>
+      <p id="validation" class="validation" role="alert" hidden></p>
+    </section>
+
+    <section class="panel" aria-label="Editor">
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" data-tab="key">Key</button>
+        <button type="button" role="tab" data-tab="layer">Layer</button>
+        <button type="button" role="tab" data-tab="settings">Settings</button>
+        <button type="button" role="tab" data-tab="firmware">Firmware</button>
+      </div>
+      <div id="panel-body" class="panel-body" role="tabpanel"></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    Runs entirely in your browser over Web Serial (Chrome or Edge on desktop). Nothing is installed on your computer.
+  </footer>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <input type="file" id="import-file" accept="application/json,.json" hidden>
+</body>
+</html>

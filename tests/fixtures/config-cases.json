@@ -1,0 +1,4829 @@
+[
+ {
+  "name": "minimal config gets defaults filled in",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "Main",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": null,
+  "normalized": {
+   "version": 1,
+   "brightness": 0.4,
+   "highlight": "#ffffff",
+   "idle_timeout": 0,
+   "type_delay": 0,
+   "rotation": 0,
+   "layers": [
+    {
+     "name": "Main",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "every action type",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "Main",
+     "keys": [
+      {
+       "label": "Copy",
+       "color": "#2F6BFF",
+       "action": {
+        "type": "keys",
+        "keys": [
+         "LEFT_GUI",
+         "C"
+        ]
+       }
+      },
+      {
+       "label": "Hi",
+       "color": "#00ff00",
+       "action": {
+        "type": "text",
+        "text": "Hello\tworld\n"
+       }
+      },
+      {
+       "label": "Vol",
+       "color": "#ff0000",
+       "action": {
+        "type": "media",
+        "code": "VOLUME_INCREMENT"
+       }
+      },
+      {
+       "label": "Macro",
+       "color": "#123456",
+       "action": {
+        "type": "macro",
+        "steps": [
+         {
+          "op": "tap",
+          "keys": [
+           "LEFT_GUI",
+           "SPACEBAR"
+          ]
+         },
+         {
+          "op": "delay",
+          "ms": 200
+         },
+         {
+          "op": "text",
+          "text": "Terminal"
+         },
+         {
+          "op": "tap",
+          "keys": [
+           "ENTER"
+          ]
+         },
+         {
+          "op": "down",
+          "keys": [
+           "LEFT_SHIFT"
+          ]
+         },
+         {
+          "op": "up",
+          "keys": []
+         },
+         {
+          "op": "media",
+          "code": "MUTE"
+         }
+        ]
+       }
+      },
+      {
+       "label": "Hold",
+       "color": "#ffffff",
+       "action": {
+        "type": "layer",
+        "mode": "hold",
+        "layer": 1
+       }
+      },
+      {
+       "label": "To",
+       "color": "#ffffff",
+       "action": {
+        "type": "layer",
+        "mode": "to",
+        "layer": 0
+       }
+      },
+      {
+       "label": "Next",
+       "color": "#ffffff",
+       "action": {
+        "type": "layer",
+        "mode": "next",
+        "layer": 1
+       }
+      },
+      {
+       "color": "#abcdef",
+       "action": null
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    },
+    {
+     "name": "Two",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ],
+   "brightness": 1,
+   "highlight": "#FF8800",
+   "idle_timeout": 60,
+   "type_delay": 5,
+   "rotation": 90
+  },
+  "error": null,
+  "normalized": {
+   "version": 1,
+   "brightness": 1.0,
+   "highlight": "#ff8800",
+   "idle_timeout": 60,
+   "type_delay": 5,
+   "rotation": 90,
+   "layers": [
+    {
+     "name": "Main",
+     "keys": [
+      {
+       "label": "Copy",
+       "color": "#2f6bff",
+       "action": {
+        "type": "keys",
+        "keys": [
+         "LEFT_GUI",
+         "C"
+        ]
+       }
+      },
+      {
+       "label": "Hi",
+       "color": "#00ff00",
+       "action": {
+        "type": "text",
+        "text": "Hello\tworld\n"
+       }
+      },
+      {
+       "label": "Vol",
+       "color": "#ff0000",
+       "action": {
+        "type": "media",
+        "code": "VOLUME_INCREMENT"
+       }
+      },
+      {
+       "label": "Macro",
+       "color": "#123456",
+       "action": {
+        "type": "macro",
+        "steps": [
+         {
+          "op": "tap",
+          "keys": [
+           "LEFT_GUI",
+           "SPACEBAR"
+          ]
+         },
+         {
+          "op": "delay",
+          "ms": 200
+         },
+         {
+          "op": "text",
+          "text": "Terminal"
+         },
+         {
+          "op": "tap",
+          "keys": [
+           "ENTER"
+          ]
+         },
+         {
+          "op": "down",
+          "keys": [
+           "LEFT_SHIFT"
+          ]
+         },
+         {
+          "op": "up",
+          "keys": []
+         },
+         {
+          "op": "media",
+          "code": "MUTE"
+         }
+        ]
+       }
+      },
+      {
+       "label": "Hold",
+       "color": "#ffffff",
+       "action": {
+        "type": "layer",
+        "mode": "hold",
+        "layer": 1
+       }
+      },
+      {
+       "label": "To",
+       "color": "#ffffff",
+       "action": {
+        "type": "layer",
+        "mode": "to",
+        "layer": 0
+       }
+      },
+      {
+       "label": "Next",
+       "color": "#ffffff",
+       "action": {
+        "type": "layer",
+        "mode": "next",
+        "layer": 0
+       }
+      },
+      {
+       "label": "",
+       "color": "#abcdef",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    },
+    {
+     "name": "Two",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "not an object",
+  "config": [
+   1,
+   2
+  ],
+  "error": "config"
+ },
+ {
+  "name": "wrong version",
+  "config": {
+   "version": 2,
+   "layers": [
+    {
+     "name": "Main",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "version"
+ },
+ {
+  "name": "brightness above 1",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "Main",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ],
+   "brightness": 2
+  },
+  "error": "brightness"
+ },
+ {
+  "name": "brightness as boolean",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "Main",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ],
+   "brightness": true
+  },
+  "error": "brightness"
+ },
+ {
+  "name": "rotation not a right angle",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "Main",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ],
+   "rotation": 45
+  },
+  "error": "rotation"
+ },
+ {
+  "name": "no layers",
+  "config": {
+   "version": 1,
+   "layers": []
+  },
+  "error": "layers"
+ },
+ {
+  "name": "nine layers",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    },
+    {
+     "name": "L",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    },
+    {
+     "name": "L",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    },
+    {
+     "name": "L",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    },
+    {
+     "name": "L",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    },
+    {
+     "name": "L",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    },
+    {
+     "name": "L",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    },
+    {
+     "name": "L",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    },
+    {
+     "name": "L",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers"
+ },
+ {
+  "name": "fifteen keys",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "Main",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys"
+ },
+ {
+  "name": "empty layer name",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].name"
+ },
+ {
+  "name": "label too long",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "xxxxxxxxxxxxxxxxxxxxxxxxx",
+       "color": "#000000"
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[0].label"
+ },
+ {
+  "name": "bad color",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "red"
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[1].color"
+ },
+ {
+  "name": "unknown action type",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "action": {
+        "type": "launch"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[2].action.type"
+ },
+ {
+  "name": "unknown key name",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "action": {
+        "type": "keys",
+        "keys": [
+         "CTRL",
+         "C"
+        ]
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[2].action.keys"
+ },
+ {
+  "name": "empty combo",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "action": {
+        "type": "keys",
+        "keys": []
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[2].action.keys"
+ },
+ {
+  "name": "seven regular keys",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "action": {
+        "type": "keys",
+        "keys": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E",
+         "F",
+         "G"
+        ]
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[0].action.keys"
+ },
+ {
+  "name": "non-ASCII text",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "action": {
+        "type": "text",
+        "text": "caf\u00e9"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[0].action.text"
+ },
+ {
+  "name": "empty text",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "action": {
+        "type": "text",
+        "text": ""
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[0].action.text"
+ },
+ {
+  "name": "unknown media key",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "action": {
+        "type": "media",
+        "code": "LOUDER"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[0].action.code"
+ },
+ {
+  "name": "layer target out of range",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "action": {
+        "type": "layer",
+        "mode": "to",
+        "layer": 1
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[15].action.layer"
+ },
+ {
+  "name": "unknown layer mode",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "action": {
+        "type": "layer",
+        "mode": "toggle",
+        "layer": 0
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[15].action.mode"
+ },
+ {
+  "name": "macro with no steps",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "action": {
+        "type": "macro",
+        "steps": []
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[4].action.steps"
+ },
+ {
+  "name": "macro with unknown op",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "action": {
+        "type": "macro",
+        "steps": [
+         {
+          "op": "tap",
+          "keys": [
+           "A"
+          ]
+         },
+         {
+          "op": "click"
+         }
+        ]
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[4].action.steps[1].op"
+ },
+ {
+  "name": "macro delay too long",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "action": {
+        "type": "macro",
+        "steps": [
+         {
+          "op": "delay",
+          "ms": 20000
+         }
+        ]
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[4].action.steps[0].ms"
+ },
+ {
+  "name": "macro tap without keys",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "action": {
+        "type": "macro",
+        "steps": [
+         {
+          "op": "tap",
+          "keys": []
+         }
+        ]
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "error": "layers[0].keys[4].action.steps[0].keys"
+ },
+ {
+  "name": "idle timeout as boolean",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "Main",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ],
+   "idle_timeout": true
+  },
+  "error": "idle_timeout"
+ },
+ {
+  "name": "type delay too long",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "Main",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ],
+   "type_delay": 500
+  },
+  "error": "type_delay"
+ }
+]

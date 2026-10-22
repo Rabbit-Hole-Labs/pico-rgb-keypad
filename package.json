@@ -1,0 +1,14 @@
+{
+  "name": "pico-rgb-keypad",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CircuitPython firmware and a Web Serial configurator for the Pimoroni Pico RGB Keypad Base",
+  "type": "module",
+  "scripts": {
+    "test": "npm run test:web && npm run test:firmware",
+    "test:web": "node --test \"tests/web/*.test.js\"",
+    "test:firmware": "python3 -B -m unittest discover -s tests/firmware -t tests/firmware",
+    "smoke": "python3 tests/hardware/smoke.py",
+    "serve": "python3 -m http.server 8000 --bind 127.0.0.1"
+  }
+}
