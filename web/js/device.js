@@ -120,9 +120,20 @@ export const serialSupported = () => typeof navigator !== 'undefined' && 'serial
 // CircuitPython boards use Adafruit's USB vendor ID, Pico and Pico 2 alike.
 export const PORT_FILTERS = [{ usbVendorId: 0x239a }];
 
+export const PORT_BUSY = 'The keypad is already open somewhere else: another browser tab or window '
+  + '(maybe in a different browser) or another app. Click Disconnect or close that tab, then '
+  + 'connect again here.';
+
 /** Open a Web Serial port and check the keypad firmware answers on it. */
 export async function openKeypad(port) {
-  await port.open({ baudRate: 115200, bufferSize: 65536 });
+  try {
+    await port.open({ baudRate: 115200, bufferSize: 65536 });
+  } catch (error) {
+    // Chrome reports a port held elsewhere as a NetworkError: "Failed to open serial port."
+    if (error?.name === 'NetworkError') throw new DeviceError(PORT_BUSY);
+    if (error?.name === 'InvalidStateError') throw new DeviceError('That port is already open in this tab.');
+    throw error;
+  }
   try {
     await port.setSignals({ dataTerminalReady: true });
   } catch { /* not every platform supports it; the firmware copes */ }

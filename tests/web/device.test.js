@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { Connection, DeviceError } from '../../web/js/device.js';
+import { Connection, DeviceError, PORT_BUSY, openKeypad } from '../../web/js/device.js';
 
 /**
  * A Connection wired to a scripted fake keypad. respond(msg) returns the reply
@@ -91,4 +91,9 @@ test('close() is reported as expected', async () => {
   conn.addEventListener('close', (e) => { closed = e.detail; });
   await conn.close();
   assert.deepEqual(closed, { expected: true });
+});
+
+test('a port held by another tab or app gets a clear message', async () => {
+  const busy = { open: async () => { throw new DOMException('Failed to open serial port.', 'NetworkError'); } };
+  await assert.rejects(openKeypad(busy), (error) => error instanceof DeviceError && error.message === PORT_BUSY);
 });
