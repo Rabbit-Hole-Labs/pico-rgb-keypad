@@ -3,9 +3,9 @@
 Pins and framing follow Pimoroni's C driver (libraries/pico_rgb_keypad):
 I2C0 on GP4/GP5 with the expander at 0x20, SPI0 on GP18/GP19 for the LEDs
 with CS on GP17 held low only while a frame is written. Key i and LED i are
-the same pad: index 0 is top-left with the Pico's USB port at the top, and
-indexes run left to right, then top to bottom. The characters printed on the
-board (0-F) follow a different order; web/js/config.js maps them for display.
+the same pad, the one printed with i (0-9, then A-F) on the board. With the
+Pico's USB port on the left, key 0 is top-left and keys run left to right,
+then top to bottom.
 """
 
 import board

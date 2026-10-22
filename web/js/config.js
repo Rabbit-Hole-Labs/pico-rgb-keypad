@@ -263,21 +263,21 @@ export function layerWarnings(cfg) {
 }
 
 // Characters printed beside the keys on the keypad base, used as key names so a
-// key on screen and on the desk have the same name. They read upright with the
-// USB port on the left (0 1 2 3 across the top row), so they run in a different
-// order from key indexes, which start top-left with the USB port at the top.
+// key on screen and on the desk have the same name. Key i is printed PRINTED[i]:
+// with the USB port on the left they read 0123 / 4567 / 89AB / CDEF.
 const PRINTED = '0123456789ABCDEF';
-export const printedLabel = (index) => PRINTED[(3 - (index % 4)) * 4 + Math.floor(index / 4)];
+export const printedLabel = (index) => PRINTED[index];
 
 /**
  * Key index shown at grid cell (x, y) when the keypad sits with its USB port
- * on the given side. rotation 0 = USB at the top, where key 0 is top-left.
+ * on the given side. rotation 0 = USB on the left, where key 0 is top-left and
+ * the printed characters read upright; each step turns the keypad clockwise.
  */
 export function cellToKey(x, y, rotation) {
   switch (rotation) {
-    case 90: return (3 - x) * 4 + y; // USB on the right
-    case 180: return (3 - y) * 4 + (3 - x);
-    case 270: return x * 4 + (3 - y); // USB on the left
+    case 90: return (3 - x) * 4 + y; // USB at the top
+    case 180: return (3 - y) * 4 + (3 - x); // USB on the right
+    case 270: return x * 4 + (3 - y); // USB at the bottom
     default: return y * 4 + x;
   }
 }

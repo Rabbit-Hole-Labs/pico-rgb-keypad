@@ -54,8 +54,8 @@ Every edit is sent to the keypad as a preview. **Save to keypad** (⌘S) stores 
 `config.json`, and **Revert** goes back to the saved version. Unsaved edits also survive a page
 reload in this browser.
 
-Set **USB port position** in Settings to match your desk. With the USB port on the left, the
-printed characters read upright and the grid reads 0123 / 4567 / 89AB / CDEF like the board.
+**USB port position** in Settings turns the on-screen keypad to match your desk. The default,
+USB on the left, is the way the printed characters read upright: 0123 / 4567 / 89AB / CDEF.
 
 A layout can be up to 12 KB, and the Settings tab shows how much you're using. The keypad holds
 the whole layout in about 90 KB of RAM. Long typed text is cheap; the worst case is many small
@@ -70,7 +70,7 @@ in Settings.
 | Mode | How you get there | What you see |
 | --- | --- | --- |
 | Normal | Plugging in | One serial port, used by the configurator. The `CIRCUITPY` drive is hidden so the firmware can write its own files. |
-| USB drive | Hold the **top-left key** while plugging in, or **Restart as USB drive** in the Firmware tab | `CIRCUITPY` appears on your computer, writable, for one boot. The CircuitPython console (REPL) appears as a second serial port. Saving and updates from the page are off. |
+| USB drive | Hold **key 0** (top-left with the USB port on the left) while plugging in, or **Restart as USB drive** in the Firmware tab | `CIRCUITPY` appears on your computer, writable, for one boot. The CircuitPython console (REPL) appears as a second serial port. Saving and updates from the page are off. |
 | Recovery | Automatic if the firmware fails to start | All keys turn red. The page shows the error and can reinstall the firmware. |
 | Bootloader | **Restart into bootloader** in the Firmware tab, or BOOTSEL while plugging in | An `RPI-RP2` or `RP2350` drive appears. Drag a CircuitPython `.uf2` onto it to update CircuitPython. Your files are kept. |
 
@@ -81,11 +81,9 @@ at boot, the firmware starts in USB drive mode so a bare Pico never hides its dr
 
 Pins follow Pimoroni's C driver: a TCA9555 key expander on I2C0 (GP4 SDA, GP5 SCL, address
 `0x20`) and 16 APA102 LEDs on SPI0 (GP18 SCK, GP19 MOSI) gated by CS on GP17. Key index *n*
-(expander bit *n*) and LED *n* are the same pad. With the USB port at the top, index 0 is
-top-left, and indexes run left to right, then top to bottom. The characters printed on the
-board read upright with the USB port on the left (0 top-left, F bottom-right), so index 0 is
-the key printed C. `printedLabel()` in `web/js/config.js` maps between the two. Both orders
-were checked on a real board.
+(expander bit *n*) and LED *n* are the same pad, the one printed *n* (0–9, then A–F) on the
+board. With the USB port on the left, key 0 is top-left and keys run left to right, then top to
+bottom. This was checked on a real board.
 
 ## Project layout
 

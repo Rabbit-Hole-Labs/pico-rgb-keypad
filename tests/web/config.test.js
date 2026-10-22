@@ -55,11 +55,11 @@ test('parsePath splits a validation path', () => {
 });
 
 test('cellToKey matches the measured layout and each rotation', () => {
-  // USB at the top: key 0 top-left, key 3 top-right, key 12 bottom-left.
+  // USB on the left: key 0 top-left, key 3 top-right, key 12 bottom-left.
   assert.equal(cellToKey(0, 0, 0), 0);
   assert.equal(cellToKey(3, 0, 0), 3);
   assert.equal(cellToKey(0, 3, 0), 12);
-  // USB on the right (turned clockwise): key 0 is top-right, key 12 top-left.
+  // USB at the top (turned clockwise): key 0 is top-right, key 12 top-left.
   assert.equal(cellToKey(3, 0, 90), 0);
   assert.equal(cellToKey(0, 0, 90), 12);
   assert.equal(cellToKey(0, 0, 180), 15);
@@ -72,15 +72,17 @@ test('cellToKey matches the measured layout and each rotation', () => {
 });
 
 test('printedLabel names keys by the characters printed on the board', () => {
-  // Checked on a real board: with the USB port on the left, 0 is top-left and 3 is
-  // top-right; with it at the top, key index 0 is top-left, beside the printed C.
-  assert.equal(printedLabel(3), '0');
-  assert.equal(printedLabel(15), '3');
-  assert.equal(printedLabel(5), '9');
-  assert.equal(printedLabel(0), 'C');
-  assert.equal(printedLabel(12), 'F');
-  const rowsWithUsbLeft = [0, 1, 2, 3].map((y) => [0, 1, 2, 3].map((x) => printedLabel(cellToKey(x, y, 270))).join(''));
-  assert.deepEqual(rowsWithUsbLeft, ['0123', '4567', '89AB', 'CDEF']);
+  // Checked on a real board: key i is printed i, and with the USB port on the left
+  // they read 0123 / 4567 / 89AB / CDEF.
+  assert.equal(printedLabel(0), '0');
+  assert.equal(printedLabel(3), '3');
+  assert.equal(printedLabel(10), 'A');
+  assert.equal(printedLabel(15), 'F');
+  const rows = (rotation) => [0, 1, 2, 3].map((y) => [0, 1, 2, 3]
+    .map((x) => printedLabel(cellToKey(x, y, rotation))).join(''));
+  assert.deepEqual(rows(0), ['0123', '4567', '89AB', 'CDEF']);
+  // Pimoroni's product photo has the USB port at the top: C840 / D951 / EA62 / FB73.
+  assert.deepEqual(rows(90), ['C840', 'D951', 'EA62', 'FB73']);
 });
 
 function threeLayers() {

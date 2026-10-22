@@ -6,9 +6,10 @@ serial port is the data port the web app talks to.
 
 USB drive mode shows CIRCUITPY to the computer, writable from there instead,
 and adds the CircuitPython console (REPL) as a second serial port.
-It lasts one boot and is entered by holding the top-left key while plugging
-the keypad in, by "Reboot to USB drive" in the web app, or when the keypad
-base doesn't answer (so a bare Pico never hides its drive).
+It lasts one boot and is entered by holding key 0 (top-left with the USB port
+on the left) while plugging the keypad in, by "Restart as USB drive" in the web
+app, or when the keypad base doesn't answer (so a bare Pico never hides its
+drive).
 """
 
 import board

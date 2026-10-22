@@ -32,7 +32,7 @@ const STEP_TYPES = [['tap', 'Press shortcut'], ['down', 'Hold keys down'], ['up'
 const IDLE_CHOICES = [[0, 'Never'], [30, 'After 30 seconds'], [60, 'After 1 minute'],
   [300, 'After 5 minutes'], [900, 'After 15 minutes'], [1800, 'After 30 minutes'],
   [3600, 'After 1 hour']];
-const ROTATION_CHOICES = [[0, 'Top'], [90, 'Right'], [180, 'Bottom'], [270, 'Left']];
+const ROTATION_CHOICES = [[0, 'Left'], [90, 'Top'], [180, 'Right'], [270, 'Bottom']];
 
 const state = {
   config: blankConfig(),
@@ -1092,7 +1092,7 @@ function firmwarePanel() {
       h('div', { class: 'action-row' },
         button('Restart as USB drive', () => reboot('drive'), { disabled: info.writable === false }),
         hint('Shows the CIRCUITPY drive on your computer for one boot, to edit files by hand. '
-          + 'Holding the top-left key while plugging in does the same.')),
+          + 'Holding key 0 while plugging in does the same.')),
       h('div', { class: 'action-row' },
         button('Restart into bootloader', () => {
           if (window.confirm('Restart into the bootloader to install CircuitPython? The keypad stops working '
