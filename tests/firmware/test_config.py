@@ -32,6 +32,15 @@ class Defaults(unittest.TestCase):
     def test_default_config_is_valid_and_stable(self):
         self.assertEqual(normalize(default_config()), default_config())
 
+    def test_windows_starter_layout(self):
+        cfg = default_config("windows")
+        self.assertEqual(normalize(default_config("windows")), cfg)
+        self.assertEqual(cfg["platform"], "windows")
+        self.assertEqual(cfg["layers"][0]["keys"][0]["action"]["keys"], ["LEFT_CONTROL", "C"])
+        self.assertEqual(default_config()["platform"], "mac")
+        with self.assertRaises(ValueError):
+            default_config("linux")
+
     def test_default_config_is_fresh_each_call(self):
         a = default_config()
         a["layers"][0]["keys"][0]["label"] = "changed"

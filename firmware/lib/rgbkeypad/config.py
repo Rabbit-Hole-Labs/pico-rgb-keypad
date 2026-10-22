@@ -20,6 +20,7 @@ LAYER_MODES = ("to", "hold", "next")
 BLINK_CHOICES = ("key", "off")  # or a "#rrggbb" color
 STEP_OPS = ("tap", "down", "up", "text", "media", "delay")
 ROTATIONS = (0, 90, 180, 270)
+PLATFORMS = ("mac", "windows")  # how the web app names keys; the keypad acts the same
 
 
 class ConfigError(ValueError):
@@ -42,15 +43,38 @@ def _next_layer(color):
     return _key("Next layer", color, {"type": "layer", "mode": "next", "layer": 0})
 
 
-def default_config():
-    """A starter layout for macOS. Built fresh each call so callers may mutate it."""
+def default_config(platform="mac"):
+    """A starter layout for macOS or Windows. Built fresh each call so callers may
+    mutate it."""
+    if platform not in PLATFORMS:
+        raise ValueError('platform must be "mac" or "windows"')
     blue, teal, amber, rose, violet, white = (
         "#2f6bff", "#00b39b", "#ff9d00", "#ff3d6e", "#8b5cf6", "#9aa4b2")
-    main = [
-        _combo("Copy", blue, "LEFT_GUI", "C"),
-        _combo("Paste", blue, "LEFT_GUI", "V"),
-        _combo("Undo", blue, "LEFT_GUI", "Z"),
-        _combo("Redo", blue, "LEFT_GUI", "LEFT_SHIFT", "Z"),
+    if platform == "windows":
+        editing = [
+            _combo("Copy", blue, "LEFT_CONTROL", "C"),
+            _combo("Paste", blue, "LEFT_CONTROL", "V"),
+            _combo("Undo", blue, "LEFT_CONTROL", "Z"),
+            _combo("Redo", blue, "LEFT_CONTROL", "Y"),
+        ]
+        system = [
+            _combo("Screenshot", rose, "LEFT_GUI", "LEFT_SHIFT", "S"),
+            _combo("Search", rose, "LEFT_GUI", "S"),
+            _combo("Task View", rose, "LEFT_GUI", "TAB"),
+        ]
+    else:
+        editing = [
+            _combo("Copy", blue, "LEFT_GUI", "C"),
+            _combo("Paste", blue, "LEFT_GUI", "V"),
+            _combo("Undo", blue, "LEFT_GUI", "Z"),
+            _combo("Redo", blue, "LEFT_GUI", "LEFT_SHIFT", "Z"),
+        ]
+        system = [
+            _combo("Screenshot", rose, "LEFT_GUI", "LEFT_SHIFT", "FOUR"),
+            _combo("Spotlight", rose, "LEFT_GUI", "SPACEBAR"),
+            _combo("Mission Ctl", rose, "LEFT_CONTROL", "UP_ARROW"),
+        ]
+    main = editing + [
         _media("Previous", teal, "SCAN_PREVIOUS_TRACK"),
         _media("Play/Pause", teal, "PLAY_PAUSE"),
         _media("Next", teal, "SCAN_NEXT_TRACK"),
@@ -59,11 +83,7 @@ def default_config():
         _media("Volume +", amber, "VOLUME_INCREMENT"),
         _media("Bright -", amber, "BRIGHTNESS_DECREMENT"),
         _media("Bright +", amber, "BRIGHTNESS_INCREMENT"),
-        _combo("Screenshot", rose, "LEFT_GUI", "LEFT_SHIFT", "FOUR"),
-        _combo("Spotlight", rose, "LEFT_GUI", "SPACEBAR"),
-        _combo("Mission Ctl", rose, "LEFT_CONTROL", "UP_ARROW"),
-        _next_layer(white),
-    ]
+    ] + system + [_next_layer(white)]
     numbers = [
         _combo("7", violet, "SEVEN"), _combo("8", violet, "EIGHT"),
         _combo("9", violet, "NINE"), _combo("Delete", rose, "BACKSPACE"),
@@ -87,6 +107,7 @@ def default_config():
         "idle_timeout": 0,
         "type_delay": 0,
         "rotation": 0,
+        "platform": platform,
         "layers": [
             {"name": "Main", "keys": main},
             {"name": "Numbers", "keys": numbers},
@@ -243,6 +264,9 @@ def normalize(cfg):
     rotation = cfg.get("rotation", 0)
     if rotation not in ROTATIONS:
         _fail("rotation", "must be 0, 90, 180 or 270")
+    platform = cfg.get("platform", "mac")
+    if platform not in PLATFORMS:
+        _fail("platform", 'must be "mac" or "windows"')
     layers = cfg.get("layers")
     if not isinstance(layers, list) or not layers:
         _fail("layers", "needs at least one layer")
@@ -276,6 +300,7 @@ def normalize(cfg):
         "idle_timeout": _int(cfg.get("idle_timeout", 0), "idle_timeout", 0, MAX_IDLE_S),
         "type_delay": _int(cfg.get("type_delay", 0), "type_delay", 0, MAX_TYPE_DELAY_MS),
         "rotation": rotation,
+        "platform": platform,
         "layers": layers,
     }
 

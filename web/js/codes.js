@@ -83,18 +83,39 @@ export const KEY_GROUPS = [
 export const KEYS = Object.fromEntries(KEY_GROUPS.flatMap(([, keys]) => keys.map(([n, c]) => [n, c])));
 export const KEY_LABELS = Object.fromEntries(KEY_GROUPS.flatMap(([, keys]) => keys.map(([n, , l]) => [n, l])));
 
-// Modifier toggles shown in the shortcut editor, in macOS display order.
-export const MODIFIERS = [
-  { name: 'LEFT_CONTROL', symbol: '⌃', label: 'Control' },
-  { name: 'LEFT_ALT', symbol: '⌥', label: 'Option / Alt' },
-  { name: 'LEFT_SHIFT', symbol: '⇧', label: 'Shift' },
-  { name: 'LEFT_GUI', symbol: '⌘', label: 'Command / Windows' },
-];
-const MODIFIER_SYMBOLS = {
-  LEFT_CONTROL: '⌃', RIGHT_CONTROL: '⌃', LEFT_ALT: '⌥', RIGHT_ALT: '⌥',
-  LEFT_SHIFT: '⇧', RIGHT_SHIFT: '⇧', LEFT_GUI: '⌘', RIGHT_GUI: '⌘',
+// How each computer names the modifier keys. The keypad sends the same USB codes
+// either way; this only changes what the editor shows.
+const MODIFIER_STYLES = {
+  mac: {
+    // Toggles in the shortcut editor, in macOS order.
+    toggles: [
+      { name: 'LEFT_CONTROL', text: '⌃ Control' },
+      { name: 'LEFT_ALT', text: '⌥ Option' },
+      { name: 'LEFT_SHIFT', text: '⇧ Shift' },
+      { name: 'LEFT_GUI', text: '⌘ Command' },
+    ],
+    short: { CONTROL: '⌃', ALT: '⌥', SHIFT: '⇧', GUI: '⌘' },
+    order: ['CONTROL', 'ALT', 'SHIFT', 'GUI'],
+    joiner: '', // ⌃⌥⇧⌘ then " + " between the other keys
+  },
+  windows: {
+    toggles: [
+      { name: 'LEFT_CONTROL', text: 'Ctrl' },
+      { name: 'LEFT_ALT', text: 'Alt' },
+      { name: 'LEFT_SHIFT', text: 'Shift' },
+      { name: 'LEFT_GUI', text: 'Win' },
+    ],
+    short: { CONTROL: 'Ctrl', ALT: 'Alt', SHIFT: 'Shift', GUI: 'Win' },
+    order: ['GUI', 'CONTROL', 'ALT', 'SHIFT'], // Win+Shift+S, Ctrl+Alt+Del
+    joiner: '+',
+  },
 };
+const style = (platform) => MODIFIER_STYLES[platform] ?? MODIFIER_STYLES.mac;
+
+/** The modifier toggles for the shortcut editor: [{name, text}]. */
+export const modifierToggles = (platform) => style(platform).toggles;
 export const isModifier = (name) => KEYS[name] >= 0xe0;
+const modifierKind = (name) => /^(?:LEFT|RIGHT)_(CONTROL|ALT|SHIFT|GUI)$/.exec(name)?.[1];
 
 // Short forms for key tiles and combo chips.
 const SHORT = {
@@ -104,20 +125,27 @@ const SHORT = {
   RIGHT_BRACKET: ']', BACKSLASH: '\\', SEMICOLON: ';', QUOTE: "'", GRAVE_ACCENT: '`',
   COMMA: ',', PERIOD: '.', FORWARD_SLASH: '/', PRINT_SCREEN: 'PrtSc', APPLICATION: 'Menu',
 };
+// Windows keyboards print words where Macs use symbols.
+const SHORT_WINDOWS = {
+  ENTER: 'Enter', TAB: 'Tab', BACKSPACE: 'Backspace', DELETE: 'Del', CAPS_LOCK: 'Caps Lock',
+};
 
-export function keyShort(name) {
-  if (MODIFIER_SYMBOLS[name]) return MODIFIER_SYMBOLS[name];
+export function keyShort(name, platform = 'mac') {
+  const kind = modifierKind(name);
+  if (kind) return style(platform).short[kind];
+  if (platform === 'windows' && SHORT_WINDOWS[name]) return SHORT_WINDOWS[name];
   if (SHORT[name]) return SHORT[name];
   const label = KEY_LABELS[name];
   return label && label.length <= 3 ? label : (label || name).replace(/^Keypad /, 'KP ');
 }
 
-/** "⌘⇧Z" style label for a list of key names: modifiers first, in macOS order. */
-export function comboLabel(keys) {
-  const order = ['LEFT_CONTROL', 'RIGHT_CONTROL', 'LEFT_ALT', 'RIGHT_ALT', 'LEFT_SHIFT',
-    'RIGHT_SHIFT', 'LEFT_GUI', 'RIGHT_GUI'];
-  const mods = order.filter((m) => keys.includes(m)).map(keyShort);
-  const rest = keys.filter((k) => !isModifier(k)).map(keyShort);
+/** "⇧⌘Z" on a Mac, "Ctrl+Shift+Z" on Windows: modifiers first, in that platform's order. */
+export function comboLabel(keys, platform = 'mac') {
+  const { order, joiner } = style(platform);
+  const mods = order.flatMap((kind) => keys.filter((k) => modifierKind(k) === kind))
+    .map((k) => keyShort(k, platform));
+  const rest = keys.filter((k) => !isModifier(k)).map((k) => keyShort(k, platform));
+  if (joiner) return [...mods, ...rest].join(joiner);
   return mods.join('') + rest.join(' + ');
 }
 

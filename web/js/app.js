@@ -3,7 +3,7 @@
 // panel, so typing never loses focus.
 
 import {
-  KEY_GROUPS, KEY_LABELS, MEDIA_LIST, MODIFIERS, comboFromEvent, comboLabel, isModifier,
+  KEY_GROUPS, KEY_LABELS, MEDIA_LIST, comboFromEvent, comboLabel, isModifier, modifierToggles,
   keyFromDomCode,
 } from './codes.js';
 import {
@@ -33,6 +33,11 @@ const IDLE_CHOICES = [[0, 'Never'], [30, 'After 30 seconds'], [60, 'After 1 minu
   [300, 'After 5 minutes'], [900, 'After 15 minutes'], [1800, 'After 30 minutes'],
   [3600, 'After 1 hour']];
 const ROTATION_CHOICES = [[0, 'Left'], [90, 'Top'], [180, 'Right'], [270, 'Bottom']];
+const PLATFORM_CHOICES = [['mac', 'Mac'], ['windows', 'Windows']];
+// Shortcut modifiers that get toggle buttons; other keys are picked from the list.
+const TOGGLED = modifierToggles('mac').map((m) => m.name);
+const detectPlatform = () => (/win/i.test(navigator.userAgentData?.platform ?? navigator.platform ?? '')
+  ? 'windows' : 'mac');
 
 const state = {
   config: blankConfig(),
@@ -125,8 +130,10 @@ function restoreDraft() {
     if (draft && Array.isArray(draft.config?.layers) && draft.config.layers.length) {
       state.config = draft.config;
       state.saved = typeof draft.saved === 'string' ? draft.saved : null;
+      return true;
     }
   } catch { /* no usable draft */ }
+  return false;
 }
 
 function clampSelection() {
@@ -291,6 +298,9 @@ async function attach(conn, hello) {
 }
 
 function adoptKeypadConfig(config) {
+  // The keypad doesn't keep JSON keys in order, so compare in normalized form.
+  const canonical = validate(config);
+  if (canonical.valid) config = canonical.config;
   const keypadJSON = JSON.stringify(config);
   state.check = validate(state.config);
   const local = configJSON();
@@ -538,7 +548,7 @@ function renderPad() {
       if (i === state.key) classes.push('selected');
       if (live && state.pressed.has(i)) classes.push('down');
       if (bad && bad.layer === state.layer && bad.key === i) classes.push('invalid');
-      const desc = describeAction(key.action, state.config.layers);
+      const desc = describeAction(key.action, state.config.layers, state.config.platform);
       cells.push(h('button', {
         type: 'button',
         class: classes.join(' '),
@@ -686,9 +696,11 @@ function actionEditor(key, action) {
           action.keys = keys;
           changed({ panel: true });
         })),
-        hint('The keys stay down for as long as you hold the keypad key. Some shortcuts '
-          + '(⌘Tab, ⌘Space, ⌘W) are taken by macOS or the browser before Record sees them, '
-          + 'so pick those from the list instead.'));
+        hint('The keys stay down for as long as you hold the keypad key. '
+          + (state.config.platform === 'windows'
+            ? 'Some shortcuts (Alt+Tab, Ctrl+W, anything with Win) are taken by Windows or the browser '
+            : 'Some shortcuts (⌘Tab, ⌘Space, ⌘W) are taken by macOS or the browser ')
+          + 'before Record sees them, so pick those from the list instead.'));
     case 'text':
       return h('div', { class: 'editor' }, textField(action, 'text', 5));
     case 'media':
@@ -736,7 +748,7 @@ function textField(target, prop, rows) {
 
 function keyOptions(placeholder) {
   const groups = KEY_GROUPS.map(([label, keys]) => h('optgroup', { label },
-    keys.filter(([name]) => !MODIFIERS.some((m) => m.name === name))
+    keys.filter(([name]) => !TOGGLED.includes(name))
       .map(([name, , text]) => h('option', { value: name }, text))));
   return [h('option', { value: '' }, placeholder), ...groups];
 }
@@ -745,14 +757,14 @@ function keyOptions(placeholder) {
 function comboEditor(id, keys, apply, { allowEmpty = false } = {}) {
   const set = (next) => apply(next);
   const recording = state.recording?.id === id;
-  const others = keys.filter((k) => !MODIFIERS.some((m) => m.name === k));
-  const mods = MODIFIERS.map((m) => h('button', {
+  const platform = state.config.platform;
+  const others = keys.filter((k) => !TOGGLED.includes(k));
+  const mods = modifierToggles(platform).map((m) => h('button', {
     type: 'button',
     class: 'btn small',
-    title: m.label,
     'aria-pressed': String(keys.includes(m.name)),
     onclick: () => set(keys.includes(m.name) ? keys.filter((k) => k !== m.name) : [...keys, m.name]),
-  }, `${m.symbol} ${m.label.split(' ')[0]}`));
+  }, m.text));
   const chips = others.map((k) => h('span', { class: 'chip' }, KEY_LABELS[k] ?? k,
     h('button', { type: 'button', 'aria-label': `Remove ${KEY_LABELS[k] ?? k}`, onclick: () => set(keys.filter((x) => x !== k)) }, '×')));
   const picker = h('select', {
@@ -765,7 +777,7 @@ function comboEditor(id, keys, apply, { allowEmpty = false } = {}) {
     onclick: () => startRecording(id, set),
   }, recording ? 'Press the shortcut… (click to cancel)' : '● Record');
   const summary = keys.length
-    ? h('span', { class: 'combo-preview', title: keys.join(' + ') }, comboLabel(keys))
+    ? h('span', { class: 'combo-preview', title: keys.join(' + ') }, comboLabel(keys, platform))
     : h('span', { class: 'hint' }, allowEmpty ? 'No keys: releases everything this macro is holding.' : 'No keys yet.');
   return h('div', { class: 'step-body' },
     h('div', { class: 'row' }, mods),
@@ -990,6 +1002,11 @@ function settingsPanel() {
           type: 'number', min: 0, max: MAX_TYPE_DELAY_MS, step: 5, value: cfg.type_delay ?? 0, style: 'width: 100px',
           oninput: (e) => { cfg.type_delay = e.target.value === '' ? NaN : Number(e.target.value); changed(); },
         }), h('span', { class: 'hint' }, 'ms · raise this if an app drops letters from typed text'))),
+    field('Your computer',
+      segmented(PLATFORM_CHOICES, cfg.platform ?? 'mac', (p) => { cfg.platform = p; changed({ panel: true }); }, 'Your computer'),
+      hint('Shows shortcuts the way your computer names them (⌘ and ⌥ on a Mac, Win and Alt on '
+        + 'Windows) and picks the matching starter layout. Shortcuts you’ve set aren’t converted: '
+        + 'the keypad sends the same keys either way, so ⌘C shows as Win+C.')),
     field('USB port position',
       segmented(ROTATION_CHOICES, cfg.rotation ?? 0, (r) => { cfg.rotation = r; changed({ panel: true }); }, 'USB port position'),
       hint('Turn the on-screen keypad to match how yours sits on the desk.')),
@@ -1004,7 +1021,7 @@ function settingsPanel() {
       button('Load starter layout', async () => {
         if (!window.confirm('Replace every layer with the starter layout? You can Revert until you save.')) return;
         try {
-          const { config } = await state.conn.call('get_default_config');
+          const { config } = await state.conn.call('get_default_config', { platform: cfg.platform ?? 'mac' });
           state.config = config;
           state.layer = 0;
           changed({ panel: true });
@@ -1014,7 +1031,9 @@ function settingsPanel() {
       }, { disabled: !canTalk(), title: canTalk() ? undefined : 'Connect the keypad first' }),
       button('Start blank', () => {
         if (!window.confirm('Clear every key and layer? You can Revert until you save.')) return;
-        state.config = { ...blankConfig(), brightness: cfg.brightness, highlight: cfg.highlight, rotation: cfg.rotation };
+        state.config = {
+          ...blankConfig(), brightness: cfg.brightness, highlight: cfg.highlight, rotation: cfg.rotation, platform: cfg.platform,
+        };
         state.layer = 0;
         changed({ panel: true });
       })),
@@ -1145,7 +1164,7 @@ function firmwarePanel() {
 // Wiring
 
 function init() {
-  restoreDraft();
+  if (!restoreDraft()) state.config.platform = detectPlatform();
   state.check = validate(state.config);
   if (state.saved === null && state.check.valid) state.saved = configJSON();
 

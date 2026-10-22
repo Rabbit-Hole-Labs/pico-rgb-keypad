@@ -137,6 +137,7 @@ test('describeAction', () => {
   const layers = [{ name: 'Main' }, { name: 'Numbers' }];
   assert.equal(describeAction({ type: 'none' }), '');
   assert.equal(describeAction({ type: 'keys', keys: ['LEFT_GUI', 'LEFT_SHIFT', 'Z'] }), '⇧⌘Z');
+  assert.equal(describeAction({ type: 'keys', keys: ['LEFT_GUI', 'LEFT_SHIFT', 'Z'] }, [], 'windows'), 'Win+Shift+Z');
   assert.equal(describeAction({ type: 'text', text: 'Hello\nthere, this is long' }),
     'Type “Hello↵there, this…”');
   assert.equal(describeAction({ type: 'media', code: 'MUTE' }), 'Mute');

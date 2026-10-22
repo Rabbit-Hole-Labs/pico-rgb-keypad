@@ -131,6 +131,7 @@
    "idle_timeout": 0,
    "type_delay": 0,
    "rotation": 0,
+   "platform": "mac",
    "layers": [
     {
      "name": "Main",
@@ -552,6 +553,7 @@
    "idle_timeout": 60,
    "type_delay": 5,
    "rotation": 90,
+   "platform": "mac",
    "layers": [
     {
      "name": "Main",
@@ -4966,6 +4968,7 @@
    "idle_timeout": 0,
    "type_delay": 0,
    "rotation": 0,
+   "platform": "mac",
    "layers": [
     {
      "name": "L0",
@@ -5233,6 +5236,7 @@
    "idle_timeout": 0,
    "type_delay": 0,
    "rotation": 0,
+   "platform": "mac",
    "layers": [
     {
      "name": "L0",
@@ -5626,5 +5630,387 @@
    ]
   },
   "error": "layers[0].keys[0].action.blink"
+ },
+ {
+  "name": "windows platform",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ],
+   "platform": "windows"
+  },
+  "error": null,
+  "normalized": {
+   "version": 1,
+   "brightness": 0.4,
+   "highlight": "#ffffff",
+   "idle_timeout": 0,
+   "type_delay": 0,
+   "rotation": 0,
+   "platform": "windows",
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "unknown platform",
+  "config": {
+   "version": 1,
+   "layers": [
+    {
+     "name": "L0",
+     "keys": [
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      },
+      {
+       "label": "",
+       "color": "#000000",
+       "action": {
+        "type": "none"
+       }
+      }
+     ]
+    }
+   ],
+   "platform": "linux"
+  },
+  "error": "platform"
  }
 ]

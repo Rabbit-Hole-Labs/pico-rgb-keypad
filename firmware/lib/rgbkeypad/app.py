@@ -102,7 +102,8 @@ class App:
             self.proto.on(cmd, handler)
         self.proto.on("hello", self.cmd_hello)
         self.proto.on("get_config", self.cmd_get_config)
-        self.proto.on("get_default_config", lambda msg: {"config": default_config()})
+        self.proto.on("get_default_config",
+                      lambda msg: {"config": default_config(msg.get("platform", "mac"))})
         self.proto.on("set_config", self.cmd_set_config)
         self.proto.on("set_layer", self.cmd_set_layer)
         self.proto.on("identify", self.cmd_identify)

@@ -17,6 +17,7 @@ export const LAYER_MODES = ['to', 'hold', 'next'];
 export const BLINK_CHOICES = ['key', 'off']; // or a '#rrggbb' color
 export const STEP_OPS = ['tap', 'down', 'up', 'text', 'media', 'delay'];
 export const ROTATIONS = [0, 90, 180, 270];
+export const PLATFORMS = ['mac', 'windows']; // how keys are named; the keypad acts the same
 
 export class ConfigError extends Error {
   constructor(path, message) {
@@ -137,6 +138,8 @@ export function normalize(cfg) {
   }
   const rotation = cfg.rotation ?? 0;
   if (!ROTATIONS.includes(rotation)) fail('rotation', 'must be 0, 90, 180 or 270');
+  const platform = cfg.platform ?? 'mac';
+  if (!PLATFORMS.includes(platform)) fail('platform', 'must be "mac" or "windows"');
   const { layers } = cfg;
   if (!Array.isArray(layers) || !layers.length) fail('layers', 'needs at least one layer');
   if (layers.length > MAX_LAYERS) fail('layers', `has more than ${MAX_LAYERS} layers`);
@@ -164,6 +167,7 @@ export function normalize(cfg) {
     idle_timeout: int(cfg.idle_timeout ?? 0, 'idle_timeout', 0, MAX_IDLE_S),
     type_delay: int(cfg.type_delay ?? 0, 'type_delay', 0, MAX_TYPE_DELAY_MS),
     rotation,
+    platform,
     layers: outLayers,
   };
 }
@@ -206,7 +210,7 @@ export const blankKey = () => ({ label: '', color: '#000000', action: { type: 'n
 export const blankLayer = (name) => ({ name, keys: Array.from({ length: NUM_KEYS }, blankKey) });
 export const blankConfig = () => ({
   version: 1, brightness: 0.4, highlight: '#ffffff', idle_timeout: 0, type_delay: 0,
-  rotation: 0, layers: [blankLayer('Main')],
+  rotation: 0, platform: 'mac', layers: [blankLayer('Main')],
 });
 
 function remapLayerRefs(cfg, map) {
@@ -300,11 +304,11 @@ const quote = (text, max = 18) => {
 };
 
 /** One-line description of an action for tiles and lists. */
-export function describeAction(a, layers = []) {
+export function describeAction(a, layers = [], platform = 'mac') {
   if (!a || a.type === 'none') return '';
   const layerName = (i) => layers[i]?.name ?? `Layer ${i + 1}`;
   switch (a.type) {
-    case 'keys': return a.keys?.length ? comboLabel(a.keys) : 'Shortcut';
+    case 'keys': return a.keys?.length ? comboLabel(a.keys, platform) : 'Shortcut';
     case 'text': return a.text ? `Type ${quote(a.text)}` : 'Type text';
     case 'media': return MEDIA_LABELS[a.code] ?? 'Media key';
     case 'macro': {

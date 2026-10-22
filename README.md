@@ -11,6 +11,8 @@ with a Raspberry Pi Pico or Pico 2.
   pick for that macro, so you can tell it's still going.
 - **Colors.** Each key has its own LED color. You also set the brightness, the color a key shows
   while pressed, and an optional idle timeout that turns the LEDs off.
+- **Mac or Windows.** A setting shows shortcuts the way your computer names them (⌘C or
+  Ctrl+C) and picks the matching starter layout. The keypad itself works the same on both.
 - **No software to install.** The keypad is a standard USB keyboard and media controller. The
   configurator is a web page that talks to the keypad over Web Serial in Chrome or Edge.
 - **Live editing.** Edits preview on the keypad as you make them and are saved when you click
@@ -27,7 +29,8 @@ with a Raspberry Pi Pico or Pico 2.
 2. **Copy the firmware.** Copy everything inside [`firmware/`](firmware/) onto the `CIRCUITPY`
    drive, replacing `code.py`. Skip `manifest.json`; it's only for the web updater.
 3. **Unplug the keypad and plug it back in.** It starts with a starter layout for macOS (copy,
-   paste, media keys, and so on) and hides the `CIRCUITPY` drive (see [Modes](#modes)).
+   paste, media keys, and so on) and hides the `CIRCUITPY` drive (see [Modes](#modes)). On
+   Windows, set **Your computer** to Windows in Settings and click **Load starter layout**.
 4. **Open the configurator** in Chrome or Edge:
 
    ```bash
@@ -42,6 +45,17 @@ The page must be served over `http://localhost` or `https://`. Opened as a file,
 firmware updates. Any static host works too, for example GitHub Pages serving the repository
 root.
 
+**Using a different port.** `npm run serve` is defined in `package.json` as
+`python3 -m http.server 8000 --bind 127.0.0.1`. Change `8000` there, or skip npm and run that
+command yourself with another port, then open `http://localhost:<port>/web/`. The browser treats
+each port as a separate site, so after a change you'll pick the keypad in the Connect dialog
+again, and unsaved edits made at the old address won't appear.
+
+**On Windows.** Use Chrome or Edge. The keypad appears in the Connect dialog as a COM port,
+and in USB drive mode `CIRCUITPY` gets a drive letter. If `python3` isn't found, run the server
+with `py -m http.server 8000 --bind 127.0.0.1` instead. The hardware test scripts in
+`tests/hardware/` open `/dev/...` ports and only run on macOS or Linux.
+
 ## Using the configurator
 
 | Area | What it does |
@@ -49,7 +63,7 @@ root.
 | Keypad grid | Click a key to edit it. Each key is named by the character printed beside it on the board (0–F). Keys glow in their LED color and highlight while you press them on the real keypad. |
 | Key tab | Label (shown on this page only), color, and the action: **Shortcut**, **Type text**, **Media**, **Macro** or **Layer**. **● Record** captures a shortcut from your keyboard. |
 | Layer tab | Rename, reorder, duplicate or delete layers. It warns about a layer you can't reach, or one you can switch to but never leave. |
-| Settings tab | Brightness, pressed-key color, idle LED timeout, delay between typed characters, which side the USB port is on, and export, import and reset. |
+| Settings tab | Mac or Windows, brightness, pressed-key color, idle LED timeout, delay between typed characters, which side the USB port is on, and export, import and reset. |
 | Firmware tab | Versions, firmware updates, and restarting normally, as a USB drive, or into the bootloader. |
 
 Every edit is sent to the keypad as a preview. **Save to keypad** (⌘S) stores it in the keypad's
@@ -128,7 +142,8 @@ The protocol uses newline-delimited JSON on the keypad's data port. Each request
 | Command | Arguments | Reply |
 | --- | --- | --- |
 | `hello` | | `fw`, `board`, `circuitpython`, `writable`, `layer`, `mem_free`, `fs_free`, `config_error`, plus `recovery` in recovery mode |
-| `get_config` / `get_default_config` | | `config` |
+| `get_config` | | `config` |
+| `get_default_config` | `platform`: `mac` or `windows` | `config`, the starter layout for that computer |
 | `set_config` | `config`, `save` | Applies the config at once and writes `config.json` if `save` is true |
 | `set_layer` | `layer` | |
 | `identify` | `key` | Blinks that key for 2 s |
@@ -147,7 +162,7 @@ The protocol uses newline-delimited JSON on the keypad's data port. Each request
 ```json
 {
   "version": 1, "brightness": 0.4, "highlight": "#ffffff",
-  "idle_timeout": 0, "type_delay": 0, "rotation": 0,
+  "idle_timeout": 0, "type_delay": 0, "rotation": 0, "platform": "mac",
   "layers": [{ "name": "Main", "keys": [
     { "label": "Copy", "color": "#2f6bff", "action": { "type": "keys", "keys": ["LEFT_GUI", "C"] } },
     { "label": "Sign-off", "color": "#00b39b", "action": { "type": "macro", "steps": [

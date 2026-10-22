@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import {
-  KEYS, MEDIA, comboFromEvent, comboLabel, keyFromDomCode, keyShort,
+  KEYS, MEDIA, comboFromEvent, comboLabel, keyFromDomCode, keyShort, modifierToggles,
 } from '../../web/js/codes.js';
 
 function pythonTable(name) {
@@ -39,6 +39,16 @@ test('comboFromEvent records modifiers then the key', () => {
   const event = { metaKey: true, shiftKey: true, ctrlKey: false, altKey: false, code: 'KeyZ' };
   assert.deepEqual(comboFromEvent(event), ['LEFT_SHIFT', 'LEFT_GUI', 'Z']);
   assert.deepEqual(comboFromEvent({ ...event, code: 'ShiftLeft' }), ['LEFT_SHIFT', 'LEFT_GUI']);
+});
+
+test('comboLabel uses Windows names and order on Windows', () => {
+  assert.equal(comboLabel(['LEFT_CONTROL', 'LEFT_SHIFT', 'Z'], 'windows'), 'Ctrl+Shift+Z');
+  assert.equal(comboLabel(['LEFT_SHIFT', 'LEFT_GUI', 'S'], 'windows'), 'Win+Shift+S');
+  assert.equal(comboLabel(['DELETE', 'LEFT_ALT', 'LEFT_CONTROL'], 'windows'), 'Ctrl+Alt+Del');
+  assert.equal(comboLabel(['ENTER'], 'windows'), 'Enter');
+  assert.equal(comboLabel(['ENTER'], 'mac'), '↩');
+  assert.deepEqual(modifierToggles('windows').map((m) => m.text), ['Ctrl', 'Alt', 'Shift', 'Win']);
+  assert.deepEqual(modifierToggles('mac').map((m) => m.name), modifierToggles('windows').map((m) => m.name));
 });
 
 test('comboLabel puts modifiers first in macOS order', () => {
